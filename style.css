@@ -89,6 +89,7 @@ html {
   font-size: 16px;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -130,10 +131,10 @@ img { max-width: 100%; display: block; }
 button { font-family: inherit; }
 
 .container {
-  width: 90%;
+  width: 100%;
   max-width: 1260px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 20px;
 }
 
 /* لمسات سينمائية في الخلفية */
@@ -965,7 +966,11 @@ footer .footer-links a:hover {
 }
 
 @media (max-width: 768px) {
-  /* قسم الهيرو في الجوال: قياسات انسيابية تمنع تكدس الأزرار */
+  .container {
+    padding: 0 16px !important;
+  }
+
+  /* قسم الهيرو في الجوال: قياسات انسيابية تمنع تكدس الأزرار ومناسبة لـ S24 Ultra والآيفون */
   .hero {
     min-height: 100svh !important;
     display: flex !important;
@@ -988,7 +993,8 @@ footer .footer-links a:hover {
     font-size: 0.94rem !important;
     line-height: 1.65 !important;
     margin-bottom: 22px !important;
-    max-width: 320px !important;
+    max-width: 440px !important;
+    width: 100% !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
@@ -997,9 +1003,10 @@ footer .footer-links a:hover {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
-    max-width: 330px !important;
+    max-width: 380px !important;
     margin: 0 auto !important;
     gap: 10px !important;
+    padding: 0 6px !important;
   }
   .hero-actions-primary {
     display: grid !important;
@@ -1009,26 +1016,120 @@ footer .footer-links a:hover {
   }
   .hero-actions-primary .btn {
     width: 100% !important;
-    padding: 12px 10px !important;
-    font-size: 0.88rem !important;
+    padding: 12px 6px !important;
+    font-size: 0.85rem !important;
     border-radius: 10px !important;
     justify-content: center !important;
+    white-space: nowrap !important;
+    gap: 5px !important;
+  }
+  .hero-actions-primary .btn svg {
+    width: 16px !important;
+    height: 16px !important;
   }
   .hero-btn-works {
     width: 100% !important;
-    padding: 10px 14px !important;
+    padding: 10px 12px !important;
     font-size: 0.82rem !important;
     border-radius: 10px !important;
     justify-content: center !important;
     text-align: center !important;
   }
 
-  /* شبكات الخدمات والبطاقات للجوال */
-  .services-grid {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    margin-bottom: 24px !important;
+  /* بطاقات الفيديو في الجوال: أبعاد منضبطة */
+  .video-card {
+    border-radius: 12px !important;
   }
+  .video-card-overlay {
+    padding: 24px 12px 10px !important;
+  }
+  .video-card-text h3 {
+    font-size: 0.98rem !important;
+  }
+  .video-card-text p {
+    font-size: 0.76rem !important;
+  }
+
+  /* اختصار قائمة الأعمال في الجوال: إخفاء البطاقات الإضافية لحين طلبها */
+  .video-card.mobile-extra-card {
+    display: none !important;
+  }
+  .photo-grid.expanded .video-card.mobile-extra-card {
+    display: block !important;
+    animation: fadeInCard 0.35s ease forwards;
+  }
+  .showcase-expand-wrap {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 16px auto 0 !important;
+    width: 100% !important;
+  }
+  .showcase-toggle-btn {
+    width: 100% !important;
+    max-width: 320px !important;
+    padding: 11px 16px !important;
+    font-size: 0.86rem !important;
+    border-radius: var(--radius-pill) !important;
+    justify-content: center !important;
+  }
+
+  /* زر استعراض كافة الأعمال متجاوب ولا يخرج عن الشاشة */
+  .btn-all-works {
+    width: 100% !important;
+    max-width: 360px !important;
+    padding: 12px 16px !important;
+    font-size: 0.86rem !important;
+    white-space: normal !important;
+    line-height: 1.4 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+
+  /* شبكات الخدمات بالجوال: شبكة 2x2 مدمجة ومريحة لا تستهلك الشاشة */
+  #services.section-pad {
+    padding: 34px 0 26px !important;
+  }
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    margin-bottom: 20px !important;
+  }
+  .service-card {
+    padding: 14px 10px !important;
+    border-radius: 12px !important;
+  }
+  .service-card-icon {
+    width: 38px !important;
+    height: 38px !important;
+    margin: 0 auto 8px !important;
+  }
+  .service-card-icon svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
+  .service-card h3 {
+    font-size: 0.88rem !important;
+    margin-bottom: 3px !important;
+  }
+  .service-card p {
+    font-size: 0.74rem !important;
+    line-height: 1.35 !important;
+  }
+
+  /* زر اطلب عرض سعر في قسم الخدمات */
+  .services-cta-btn {
+    width: 100% !important;
+    max-width: 340px !important;
+    padding: 12px 18px !important;
+    font-size: 0.92rem !important;
+    white-space: normal !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+  }
+
   .about-highlights {
     grid-template-columns: 1fr !important;
     gap: 10px !important;
@@ -1052,6 +1153,11 @@ footer .footer-links a:hover {
     flex-direction: column;
     gap: 10px !important;
   }
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ========================================================

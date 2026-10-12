@@ -546,9 +546,9 @@
       .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 26px auto 0; }
     }
 
-    @media (max-width: 600px) {
-      .video-card { grid-column: span 12; aspect-ratio: 16 / 10; }
-      .services-grid { grid-template-columns: 1fr; }
+    @media (max-width: 768px) {
+      .video-card { grid-column: span 12; aspect-ratio: 16 / 9.5; }
+      .services-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
     }
   </style>
 </head>
@@ -630,7 +630,7 @@
         <p class="section-desc">اضغط على أي فيديو لتشغيله مباشرة وفوراً — أو اضغط على «المعرض» للانتقال ومشاهدة جميع أعمال القطاع</p>
       </div>
 
-      <div class="photo-grid">
+      <div class="photo-grid" id="homePhotoGrid">
 
         <!-- 1. Corporate / Companies (أرامكو) -->
         <div class="video-card" onclick="openHomeVideo('1GUHCX_GFLMlqNkfBvuVifv88XW-eF5Bb', 'الشركات والمؤسسات الكبرى (أرامكو)', 'works.html?filter=corporate')">
@@ -655,80 +655,11 @@
           </div>
         </div>
 
-        <!-- 2. Health Sector (مستشفى سليمان الحبيب) -->
-        <div class="video-card" onclick="openHomeVideo('1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk', 'القطاع الصحي والمستشفيات (سليمان الحبيب)', 'works.html?filter=health')">
-          <span class="video-card-tag">وزارة الصحة</span>
-          <div class="thumb-wrap">
-            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk&sz=w1200" alt="القطاع الصحي والطب" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80'">
-            <div class="play-overlay">
-              <div class="play-btn-circle">
-                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </div>
-              <span class="play-text-hint">تشغيل فوري ▶</span>
-            </div>
-          </div>
-          <div class="video-card-overlay">
-            <div class="video-card-text">
-              <h3>القطاع الصحي والمستشفيات</h3>
-              <p>مستشفى سليمان الحبيب، التجمع الصحي</p>
-            </div>
-            <a href="works.html?filter=health" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
-              <span>المعرض</span> &larr;
-            </a>
-          </div>
-        </div>
-
-        <!-- 3. Construction & Real Estate (مشاريع الإسكان) -->
-        <div class="video-card" onclick="openHomeVideo('1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-', 'البناء والإسكان والتطوير العقاري', 'works.html?filter=construction')">
-          <span class="video-card-tag">البناء والإسكان</span>
-          <div class="thumb-wrap">
-            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-&sz=w1200" alt="شركات البناء والإسكان" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d0fbb18615f7?auto=format&fit=crop&w=1200&q=80'">
-            <div class="play-overlay">
-              <div class="play-btn-circle">
-                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </div>
-              <span class="play-text-hint">تشغيل فوري ▶</span>
-            </div>
-          </div>
-          <div class="video-card-overlay">
-            <div class="video-card-text">
-              <h3>البناء والإسكان والتطوير</h3>
-              <p>شركة السديم، انوفيست، مخطط البدرية</p>
-            </div>
-            <a href="works.html?filter=construction" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
-              <span>المعرض</span> &larr;
-            </a>
-          </div>
-        </div>
-
-        <!-- 4. Sports (نادي القادسية) -->
-        <div class="video-card" onclick="openHomeVideo('1iai-FCFxCNCjDan6fuzfTriJs7WTNK4s', 'وزارة الرياضة (نادي القادسية)', 'works.html?filter=sports')">
-          <span class="video-card-tag">وزارة الرياضة</span>
-          <div class="thumb-wrap">
-            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1iai-FCFxCNCjDan6fuzfTriJs7WTNK4s&sz=w1200" alt="الأندية الرياضية" onerror="this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80'">
-            <div class="play-overlay">
-              <div class="play-btn-circle">
-                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </div>
-              <span class="play-text-hint">تشغيل فوري ▶</span>
-            </div>
-          </div>
-          <div class="video-card-overlay">
-            <div class="video-card-text">
-              <h3>الرياضة والأندية المحترفة</h3>
-              <p>نادي القادسية، نادي الترجي بالقطيف</p>
-            </div>
-            <a href="works.html?filter=sports" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
-              <span>المعرض</span> &larr;
-            </a>
-          </div>
-        </div>
-
-        <!-- 5. Hospitality / Cafes & Restaurants (المطاعم والكافيهات) -->
-        <div class="video-card" onclick="openHomeVideo('1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N', 'المطاعم والمقاهي الفاخرة', 'works.html?filter=hospitality')">
+        <!-- 2. Hospitality / Cafes & Restaurants (المطاعم والكافيهات - فيديو الطعام والطهي الصحيح) -->
+        <div class="video-card" onclick="openHomeVideo('1BGPcCaOBY2PX329H06uEYOuJMAskYiWU', 'المطاعم والمقاهي الفاخرة (مطعم خان الريحان)', 'works.html?filter=hospitality')">
           <span class="video-card-tag">المطاعم والكافيهات</span>
           <div class="thumb-wrap">
-            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N&sz=w1200" alt="المطاعم والكافيهات السينمائية" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80'">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1BGPcCaOBY2PX329H06uEYOuJMAskYiWU&sz=w1200" alt="المطاعم والكافيهات السينمائية" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80'">
             <div class="play-overlay">
               <div class="play-btn-circle">
                 <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -739,7 +670,7 @@
           <div class="video-card-overlay">
             <div class="video-card-text">
               <h3>المطاعم والمقاهي الفاخرة</h3>
-              <p>تغطيات سينمائية لأفخم المطاعم والضيافة</p>
+              <p>خان الريحان، مانتروز، وأفخم المطاعم</p>
             </div>
             <a href="works.html?filter=hospitality" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
               <span>المعرض</span> &larr;
@@ -747,7 +678,7 @@
           </div>
         </div>
 
-        <!-- 6. Weddings & Celebrations (الزواجات والأفراح) -->
+        <!-- 3. Weddings & Celebrations (الزواجات والأفراح) -->
         <div class="video-card" onclick="openHomeVideo('1VHNNUkeugR5NLY1bTNO4Owsk1LtR8wu7', 'توثيق الزواجات والأفراح', 'works.html?filter=weddings')">
           <span class="video-card-tag">الزواجات والأفراح</span>
           <div class="thumb-wrap">
@@ -770,8 +701,77 @@
           </div>
         </div>
 
+        <!-- 4. Sports & Boxing (الرياضة والأندية والملاكمة - فيديو الملاكمة الصحيح) -->
+        <div class="video-card" onclick="openHomeVideo('1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N', 'الرياضة ونادي الملاكمة واللياقة (Boxing & Sports)', 'works.html?filter=sports')">
+          <span class="video-card-tag">الرياضة والملاكمة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N&sz=w1200" alt="نادي الملاكمة والرياضة" onerror="this.src='https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
+              <h3>الرياضة والملاكمة والأندية</h3>
+              <p>نادي الملاكمة، نادي القادسية، والترجي</p>
+            </div>
+            <a href="works.html?filter=sports" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
+          </div>
+        </div>
+
+        <!-- 5. Health Sector (مستشفى سليمان الحبيب - مخفي بالجوال حتى الضغط على عرض المزيد) -->
+        <div class="video-card mobile-extra-card" onclick="openHomeVideo('1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk', 'القطاع الصحي والمستشفيات (سليمان الحبيب)', 'works.html?filter=health')">
+          <span class="video-card-tag">وزارة الصحة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk&sz=w1200" alt="القطاع الصحي والطب" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
+              <h3>القطاع الصحي والمستشفيات</h3>
+              <p>مستشفى سليمان الحبيب، التجمع الصحي</p>
+            </div>
+            <a href="works.html?filter=health" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
+          </div>
+        </div>
+
+        <!-- 6. Construction & Real Estate (مشاريع الإسكان) -->
+        <div class="video-card mobile-extra-card" onclick="openHomeVideo('1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-', 'البناء والإسكان والتطوير العقاري', 'works.html?filter=construction')">
+          <span class="video-card-tag">البناء والإسكان</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-&sz=w1200" alt="شركات البناء والإسكان" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d0fbb18615f7?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
+              <h3>البناء والإسكان والتطوير</h3>
+              <p>شركة السديم، انوفيست، مخطط البدرية</p>
+            </div>
+            <a href="works.html?filter=construction" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
+          </div>
+        </div>
+
         <!-- 7. China Documentary (فيلم الصين) -->
-        <div class="video-card" onclick="openHomeVideo('1fpgduxF-RgA7VXIGZBUl0oO5t08Z_-dv', 'فيلم الصين الوثائقي', 'works.html?filter=china')">
+        <div class="video-card mobile-extra-card" onclick="openHomeVideo('1fpgduxF-RgA7VXIGZBUl0oO5t08Z_-dv', 'فيلم الصين الوثائقي', 'works.html?filter=china')">
           <span class="video-card-tag">فيلم الصين</span>
           <div class="thumb-wrap">
             <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1fpgduxF-RgA7VXIGZBUl0oO5t08Z_-dv&sz=w1200" alt="فيلم الصين" onerror="this.src='https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80'">
@@ -794,7 +794,7 @@
         </div>
 
         <!-- 8. National Day (اليوم الوطني) -->
-        <div class="video-card" onclick="openHomeVideo('1PZF1T87poIpqkNkifBTFaC33V5AkNNOm', 'اليوم الوطني والمناسبات الكبرى', 'works.html?filter=national')">
+        <div class="video-card mobile-extra-card" onclick="openHomeVideo('1PZF1T87poIpqkNkifBTFaC33V5AkNNOm', 'اليوم الوطني والمناسبات الكبرى', 'works.html?filter=national')">
           <span class="video-card-tag">المناسبات الوطنية</span>
           <div class="thumb-wrap">
             <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1PZF1T87poIpqkNkifBTFaC33V5AkNNOm&sz=w1200" alt="اليوم الوطني" onerror="this.src='https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80'">
@@ -817,7 +817,7 @@
         </div>
 
         <!-- 9. TV Programs & Podcast (البرامج والبودكاست) -->
-        <div class="video-card" onclick="openHomeVideo('19xpFZj_t7aWRjMOVF8oAxgNiN1bg7wi_', 'برنامج صحتك مع وليد — برامج وبودكاست', 'works.html?filter=tv')">
+        <div class="video-card mobile-extra-card" onclick="openHomeVideo('19xpFZj_t7aWRjMOVF8oAxgNiN1bg7wi_', 'برنامج صحتك مع وليد — برامج وبودكاست', 'works.html?filter=tv')">
           <span class="video-card-tag">برامج وبودكاست</span>
           <div class="thumb-wrap">
             <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=19xpFZj_t7aWRjMOVF8oAxgNiN1bg7wi_&sz=w1200" alt="البرامج التلفزيونية والبودكاست" onerror="this.src='https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=80'">
@@ -839,6 +839,14 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- زر إظهار باقي القطاعات للجوال (اختصار القائمة لسرعة التصفح) -->
+      <div class="showcase-expand-wrap" id="showcaseExpandWrap">
+        <button type="button" class="btn btn-outline-gold showcase-toggle-btn" id="showcaseToggleBtn" onclick="toggleShowcaseCards()">
+          <span id="showcaseToggleText">عرض باقي القطاعات (+5 قطاعات أخرى)</span>
+          <span id="showcaseToggleIcon">&darr;</span>
+        </button>
       </div>
 
       <!-- Action Button to Dedicated Works Page -->
@@ -927,8 +935,8 @@
         </a>
       </div>
 
-      <div style="text-align:center;">
-        <a href="booking.html" class="btn btn-gold">اطلب عرض سعر مخصص لمشروعك الآن &larr;</a>
+      <div class="services-cta-wrap">
+        <a href="booking.html" class="btn btn-gold services-cta-btn">اطلب عرض سعر لمشروعك الآن &larr;</a>
       </div>
     </div>
   </section>
@@ -1054,9 +1062,23 @@
       }
     }
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeHomeVideo();
-    });
+    // Toggle showcase extra cards on mobile
+    function toggleShowcaseCards() {
+      const grid = document.getElementById('homePhotoGrid');
+      const btnText = document.getElementById('showcaseToggleText');
+      const btnIcon = document.getElementById('showcaseToggleIcon');
+      if (!grid) return;
+      const isExpanded = grid.classList.toggle('expanded');
+      if (btnText && btnIcon) {
+        if (isExpanded) {
+          btnText.textContent = 'إخفاء القطاعات الإضافية';
+          btnIcon.innerHTML = '&uarr;';
+        } else {
+          btnText.textContent = 'عرض باقي القطاعات (+5 قطاعات أخرى)';
+          btnIcon.innerHTML = '&darr;';
+        }
+      }
+    }
   </script>
 
   <!-- GSAP Suite & Interactions -->
