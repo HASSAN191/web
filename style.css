@@ -77,7 +77,7 @@
   --shadow-glow: 0 0 25px rgba(163, 121, 44, 0.15);
 }
 
-/* الأساسيات */
+/* الأساسيات وقواعد Mobile-Native الاحترافية */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -87,6 +87,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -99,6 +101,22 @@ body {
   position: relative;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+button, a, [role="button"], .video-card {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+input, textarea, select {
+  font-size: 16px !important; /* يمنع متصفح سفاري على الآيفون من عمل تكبير تلقائي مزعج */
+}
+
+/* رد فعل اللمس الفوري (Haptic Instant Press Feedback) */
+.btn:active, .nav-links a:active, .video-card:active, .service-card:active, .theme-toggle-btn:active, .burger:active {
+  transform: scale(0.97) !important;
+  transition: transform 100ms cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 a {
@@ -776,173 +794,248 @@ footer .footer-links a:hover {
 
 /* ========================================================
    التجاوب الشامل للهواتف والشاشات الصغيرة (1024px فما دون)
+   Mobile-Native Design Architecture
    ======================================================== */
 @media (max-width: 1024px) {
-  /* شريط علوي سينمائي مريح للجوال بدون أي قص أو تزاحم إطلاقاً */
+  /* شريط علوي مصغر وأنيق للجوال */
   .navbar {
-    height: 64px;
+    height: 58px;
     background: rgba(10, 11, 14, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.15);
   }
   [data-theme="light"] .navbar {
     background: rgba(247, 245, 239, 0.94);
+    border-bottom: 1px solid rgba(163, 121, 44, 0.15);
   }
   .nav-inner {
-    height: 64px;
+    height: 58px;
     padding: 0 16px;
-    gap: 10px;
+    gap: 8px;
     justify-content: space-between;
   }
   .logo-brand {
     margin-left: 0 !important;
-    font-size: 1.2rem;
-    letter-spacing: 1.5px;
+    font-size: 1.15rem;
+    letter-spacing: 1.2px;
   }
   .nav-actions {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  /* زر تبديل الثيم كدائرة مقاس 38px */
+  /* زر تبديل الثيم كدائرة مقاس 36px */
   .theme-toggle-btn {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     flex-shrink: 0;
   }
-  /* زر واتساب في شريط الجوال كدائرة خضراء أنيقة مقاس 38px مع إخفاء النص الطويل */
-  .nav-actions .nav-btn-wa {
-    display: inline-flex !important;
-    width: 38px !important;
-    height: 38px !important;
-    min-width: 38px !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex-shrink: 0 !important;
-  }
-  .nav-actions .nav-btn-wa .wa-btn-text {
-    display: none !important;
-  }
-  .nav-actions .nav-btn-wa svg {
-    width: 20px !important;
-    height: 20px !important;
-    margin: 0 !important;
-  }
-  /* زر احجز مشروعك: يختفي من الشريط العلوي لمنع أي تزاحم ويكون متاحاً وبارزاً داخل القائمة المنسدلة */
+  /* إخفاء الأزرار المزدحمة من الشريط العلوي بالجوال */
+  .nav-actions .nav-btn-wa,
   .nav-actions .nav-btn-book {
     display: none !important;
   }
-  /* إظهار زر البرجر المتحرك عند 1024px فما دون */
+  /* زر البرجر المتحرك */
   .burger {
     display: flex;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
     flex-shrink: 0;
   }
-  /* القائمة المنسدلة للجوال بشاشة انسيابية وفخمة تملأ الواجهة بأسلوب عصري */
+
+  /* شاشة القائمة المنبثقة للجوال — تصميم شاشة كاملة راقٍ ومصمت يمنع تداخل أي نصوص */
   .nav-links {
     position: fixed;
-    top: 64px;
+    top: 58px;
     right: 0;
     left: 0;
     bottom: 0;
-    height: calc(100vh - 64px);
-    background: rgba(10, 11, 14, 0.98);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    height: calc(100dvh - 58px);
+    background: #090a0d !important;
     flex-direction: column;
-    padding: 28px 20px 40px;
-    gap: 14px;
+    padding: 18px 20px calc(24px + env(safe-area-inset-bottom, 20px));
+    gap: 0;
     display: flex;
     transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-    z-index: 999;
+    z-index: 1200;
     overflow-y: auto;
-    border-bottom: 2px solid var(--border-gold);
-    text-align: center;
+    -webkit-overflow-scrolling: touch;
+    text-align: right;
   }
+
   [data-theme="light"] .nav-links {
-    background: rgba(247, 245, 239, 0.98);
+    background: #f7f5ef !important;
   }
+
   .nav-links.open {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
   }
+
   .nav-links li {
     width: 100%;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.12);
   }
+  [data-theme="light"] .nav-links li {
+    border-bottom: 1px solid rgba(163, 121, 44, 0.12);
+  }
+
   .nav-links a {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    padding: 13px 18px;
-    display: block;
-    border-radius: var(--radius-sm);
+    padding: 16px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: var(--text-cream);
-    transition: var(--transition);
+    text-decoration: none;
+    transition: color 0.2s, background-color 0.2s;
+    border-radius: 6px;
+  }
+  .nav-links a::after {
+    display: none !important;
   }
   .nav-links a:hover, .nav-links a.active {
+    color: var(--gold-primary);
+    background: rgba(197, 160, 89, 0.08);
+  }
+  .nav-links a .nav-arrow {
+    display: inline-block;
+    color: var(--gold-primary);
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+  }
+  .nav-links a:active .nav-arrow {
+    transform: translateX(-4px);
+  }
+  .nav-links a .nav-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: rgba(197, 160, 89, 0.18);
     color: var(--gold-light);
-    background: rgba(197, 160, 89, 0.1);
+    font-weight: 600;
+    margin-right: auto;
+    margin-left: 10px;
   }
-  /* إبراز رابط حجز الباقات كزر ذهبي أنيق وبارز داخل القائمة المنسدلة */
-  .nav-links a.nav-booking-link {
-    background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-    color: #0a0b0e !important;
-    padding: 14px 22px;
+
+  /* أزرار الحجز والواتساب أسفل القائمة المنبثقة بالجوال */
+  .nav-drawer-cta {
+    border-bottom: none !important;
+    margin-top: auto;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .nav-drawer-cta .btn {
+    width: 100%;
+    padding: 13px;
+    font-size: 0.95rem;
     border-radius: var(--radius-sm);
-    font-size: 1.05rem;
-    font-weight: 800;
-    margin-top: 10px;
-    box-shadow: 0 4px 18px rgba(197, 160, 89, 0.35);
+    text-align: center;
+    justify-content: center;
   }
-  [data-theme="light"] .nav-links a.nav-booking-link {
-    color: #ffffff !important;
+  .nav-drawer-social {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 6px;
+    direction: ltr;
+  }
+}
+
+/* إخفاء عناصر درج الجوال على الشاشات الكبيرة */
+@media (min-width: 1025px) {
+  .nav-drawer-cta,
+  .nav-links .nav-arrow,
+  .nav-links .nav-badge,
+  .nav-drawer-social {
+    display: none !important;
   }
 }
 
 @media (max-width: 768px) {
-  /* أزرار ونصوص الهيرو في الجوال */
+  /* قسم الهيرو في الجوال: قياسات انسيابية تمنع تكدس الأزرار */
   .hero {
-    padding: 105px 16px 45px !important;
-    min-height: auto;
+    min-height: 100svh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: calc(58px + env(safe-area-inset-top, 0px) + 20px) 16px 44px !important;
+  }
+  .hero-badge {
+    font-size: 0.72rem !important;
+    padding: 4px 14px !important;
+    letter-spacing: 1.5px !important;
+    margin-bottom: 14px !important;
   }
   .hero-title {
-    font-size: clamp(1.85rem, 8vw, 2.7rem) !important;
+    font-size: clamp(1.85rem, 7.5vw, 2.35rem) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 14px !important;
   }
   .hero-desc {
-    font-size: 1rem !important;
-    margin-bottom: 24px !important;
-    line-height: 1.7 !important;
+    font-size: 0.94rem !important;
+    line-height: 1.65 !important;
+    margin-bottom: 22px !important;
+    max-width: 320px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
+  /* أزرار الهيرو بالجوال: صف أول زرين متجاورين، وصف ثانٍ زر الاستعراض */
   .hero-actions {
-    flex-direction: column;
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-    gap: 10px;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 330px !important;
+    margin: 0 auto !important;
+    gap: 10px !important;
   }
-  .hero-actions .btn {
-    width: 100%;
-    text-align: center;
-    padding: 13px 18px;
-    font-size: 0.95rem;
+  .hero-actions-primary {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    width: 100% !important;
   }
+  .hero-actions-primary .btn {
+    width: 100% !important;
+    padding: 12px 10px !important;
+    font-size: 0.88rem !important;
+    border-radius: 10px !important;
+    justify-content: center !important;
+  }
+  .hero-btn-works {
+    width: 100% !important;
+    padding: 10px 14px !important;
+    font-size: 0.82rem !important;
+    border-radius: 10px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
   /* شبكات الخدمات والبطاقات للجوال */
   .services-grid {
     grid-template-columns: 1fr !important;
-    gap: 14px !important;
+    gap: 12px !important;
     margin-bottom: 24px !important;
   }
   .about-highlights {
     grid-template-columns: 1fr !important;
     gap: 10px !important;
   }
-  /* الزر العائم للواتساب بأبعاد مناسبة للجوال تمنع التداخل */
+  /* الزر العائم للواتساب بأبعاد مريحة ومراعاة Safe Area في الجوال */
   .floating-wa {
-    bottom: 18px !important;
+    bottom: max(18px, env(safe-area-inset-bottom, 18px)) !important;
     left: 18px !important;
     width: 48px !important;
     height: 48px !important;
@@ -953,7 +1046,7 @@ footer .footer-links a:hover {
   }
   /* تذييل الصفحة مع مساحة مريحة تمنع تغطية المحتوى */
   footer {
-    padding: 34px 16px 75px !important;
+    padding: 34px 16px max(75px, calc(65px + env(safe-area-inset-bottom, 0px))) !important;
   }
   .footer-links {
     flex-direction: column;
