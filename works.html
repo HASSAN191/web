@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معرض الأعمال السينمائية (36 عمل مصنف) | GOLDEN LENS STUDIO</title>
+
+  <!-- Instant Theme Loader (Zero flicker) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('goldenlens_theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- GSAP Core & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Importmap to enable `import { gsap } from "gsap";` in all browser ES modules -->
+  <script type="importmap">
+  {
+    "imports": {
+      "gsap": "https://esm.sh/gsap@3.12.5",
+      "gsap/ScrollTrigger": "https://esm.sh/gsap@3.12.5/ScrollTrigger"
+    }
+  }
+  </script>
+  <style>
+    .works-hero {
+      padding: 125px 0 30px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 28px auto 20px;
+      max-width: 1150px;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      color: var(--text-muted);
+      padding: 9px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--gold-light);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: #0a0b0e;
+      border-color: var(--gold-primary);
+      box-shadow: 0 4px 18px rgba(197, 160, 89, 0.35);
+    }
+
+    [data-theme="light"] .filter-btn.active {
+      color: #ffffff;
+    }
+
+    .filter-btn .count-badge {
+      font-size: 0.75rem;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+
+    .filter-btn.active .count-badge {
+      background: rgba(0, 0, 0, 0.35);
+      color: #fff;
+    }
+
+    .works-status-bar {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      margin-bottom: 30px;
+    }
+
+    .works-section {
+      padding-bottom: 90px;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .work-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--transition);
+      aspect-ratio: 16 / 9;
+      grid-column: span 4;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .work-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 160, 89, 0.2);
+    }
+
+    .work-info-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 34px 18px 16px;
+      background: linear-gradient(to top, rgba(10, 11, 14, 0.96) 0%, rgba(10, 11, 14, 0.5) 60%, transparent 100%);
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .work-info h3 {
+      font-size: 1.08rem;
+      color: #ffffff;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+
+    .work-info p {
+      color: var(--gold-light);
+      font-size: 0.82rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .work-cat-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(18, 20, 26, 0.88);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      z-index: 5;
+    }
+
+    .cta-banner {
+      background: radial-gradient(ellipse at 50% 50%, rgba(197, 160, 89, 0.12) 0%, var(--bg-card) 70%);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 50px 24px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .cta-banner h2 {
+      font-size: 2.1rem;
+      color: var(--text-cream);
+      margin-bottom: 12px;
+    }
+
+    .cta-banner p {
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 26px;
+      font-size: 1.05rem;
+    }
+
+    @media (max-width: 1024px) {
+      .work-card { grid-column: span 6; }
+    }
+    @media (max-width: 640px) {
+      .work-card { grid-column: span 12; }
+      .filter-bar { gap: 6px; }
+      .filter-btn { padding: 7px 14px; font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo-brand" dir="ltr">
+        GOLDEN <span>LENS</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="works.html" class="active">الأعمال</a></li>
+        <li><a href="index.html#about">من نحن</a></li>
+        <li><a href="index.html#services">الخدمات</a></li>
+        <li><a href="booking.html">اطلب عرض سعر</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="تبديل الوضع الليلي / النهاري" title="تبديل الوضع">
+          <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <a href="booking.html" class="btn btn-outline-gold">احجز مشروعك</a>
+        <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+          واتساب
+        </a>
+        <button class="burger" id="burgerBtn" aria-label="القائمة">&#9776;</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Header -->
+  <header class="works-hero">
+    <div class="container">
+      <span class="section-tag">Cinematic Archive</span>
+      <h1 class="section-title">معرض أعمال جولدن لينس</h1>
+      <p class="section-desc">
+        تصفح إنتاجاتنا السينمائية الـ 36 المصنفة حسب القطاعات، واشهد بنفسك على مستوى الإخراج، التلوين، ودقة التفاصيل
+      </p>
+
+      <!-- Category Filter Tabs (Including Standalone China Tab) -->
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-filter="all">
+          <span>الكل</span>
+          <span class="count-badge">36</span>
+        </button>
+        <button class="filter-btn" data-filter="china">
+          <span>الصين</span>
+          <span class="count-badge">1</span>
+        </button>
+        <button class="filter-btn" data-filter="construction">
+          <span>شركات البناء والإسكان</span>
+          <span class="count-badge">6</span>
+        </button>
+        <button class="filter-btn" data-filter="sports">
+          <span>وزارة الرياضة</span>
+          <span class="count-badge">2</span>
+        </button>
+        <button class="filter-btn" data-filter="health">
+          <span>وزارة الصحة</span>
+          <span class="count-badge">7</span>
+        </button>
+        <button class="filter-btn" data-filter="education">
+          <span>وزارة التعليم</span>
+          <span class="count-badge">1</span>
+        </button>
+        <button class="filter-btn" data-filter="corporate">
+          <span>الشركات والمؤسسات</span>
+          <span class="count-badge">5</span>
+        </button>
+        <button class="filter-btn" data-filter="national">
+          <span>اليوم الوطني والمناسبات</span>
+          <span class="count-badge">4</span>
+        </button>
+        <button class="filter-btn" data-filter="universities">
+          <span>الجامعات</span>
+          <span class="count-badge">1</span>
+        </button>
+        <button class="filter-btn" data-filter="hospitality">
+          <span>المطاعم والكافيهات</span>
+          <span class="count-badge">3</span>
+        </button>
+        <button class="filter-btn" data-filter="ramadan">
+          <span>رمضان والمواسم</span>
+          <span class="count-badge">1</span>
+        </button>
+        <button class="filter-btn" data-filter="weddings">
+          <span>الزواجات والأفراح</span>
+          <span class="count-badge">2</span>
+        </button>
+        <button class="filter-btn" data-filter="tv">
+          <span>البرامج التلفزيونية والوثائقية</span>
+          <span class="count-badge">3</span>
+        </button>
+        <button class="filter-btn" data-filter="motion">
+          <span>موشن جرافيك</span>
+          <span class="count-badge">1</span>
+        </button>
+      </div>
+
+      <div class="works-status-bar" id="worksStatusBar">
+        يتم عرض جميع الأعمال (36 عمل إنتاجي) — اضغط على أي عمل لمشاهدة الفيديو فوراً
+      </div>
+    </div>
+  </header>
+
+  <!-- Works Showcase Section -->
+  <main class="works-section">
+    <div class="container">
+      <div class="works-grid" id="worksGrid">
+
+        <!-- ==============================================
+             0. الصين (مستقلة بذاتها كما طلبت بدقة)
+             ============================================== -->
+        <div class="work-card" data-category="china" data-video-id="1fpgduxF-RgA7VXIGZBUl0oO5t08Z_-dv">
+          <span class="work-cat-badge">الصين</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1fpgduxF-RgA7VXIGZBUl0oO5t08Z_-dv&sz=w1200" alt="الصين" onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>الصين</h3>
+              <p>توثيق سينمائي مميز لرحلة وفعاليات الصين الدولية</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+             1. شركات البناء والإسكان (6 أعمال)
+             ============================================== -->
+        <!-- 1.1 شركات البناء والاسكان -->
+        <div class="work-card" data-category="construction" data-video-id="1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-">
+          <span class="work-cat-badge">شركات البناء والإسكان</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-&sz=w1200" alt="شركات البناء والإسكان" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d0fbb18615f7?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>شركات البناء والإسكان</h3>
+              <p>توثيق وتغطية هندسية سينمائية لمشاريع البناء والتطوير السكني</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.2 شركة السديم -->
+        <div class="work-card" data-category="construction" data-video-id="1zv4Y2WAetwBEcrBKdPr0ib7ycdRx6tPM">
+          <span class="work-cat-badge">شركات البناء والإسكان</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1zv4Y2WAetwBEcrBKdPr0ib7ycdRx6tPM&sz=w1200" alt="شركة السديم" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>شركة السديم</h3>
+              <p>إبراز المشاريع الإنشائية والمعمارية بأعلى معايير الإخراج والتصوير</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.3 انوفيست (1) -->
+        <div class="work-card" data-category="construction" data-video-id="1O0-8fc5NsDH79nJlUKFDRl2Fu1h6qWrQ">
+          <span class="work-cat-badge">شركات البناء والإسكان</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1O0-8fc5NsDH79nJlUKFDRl2Fu1h6qWrQ&sz=w1200" alt="انوفيست — استثمار وتطوير (1)" onerror="this.src='https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>انوفيست — التطوير الاستثماري (1)</h3>
+              <p>تغطية سينمائية تبرز ضخامة المشاريع العقارية لشركة انوفيست</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.4 مادة السلايد -->
+        <div class="work-card" data-category="construction" data-video-id="1QUGqdD5tv5mDx6FkaSZqMp1HDVpfmQmT">
+          <span class="work-cat-badge">شركات البناء والإسكان</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1QUGqdD5tv5mDx6FkaSZqMp1HDVpfmQmT&sz=w1200" alt="مادة السلايد" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>مادة السلايد الإنشائية</h3>
+              <p>عرض سينمائي دقيق لتفاصيل المواد الإنشائية والتقنيات المعمارية</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.5 مخطط البدرية -->
+        <div class="work-card" data-category="construction" data-video-id="1v-qhl9F37rob09XHS5oLXcBhEs1UCHEA">
+          <span class="work-cat-badge">شركات البناء والإسكان</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1v-qhl9F37rob09XHS5oLXcBhEs1UCHEA&sz=w1200" alt="مخطط البدرية" onerror="this.src='https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>مخطط البدرية السكني</h3>
+              <p>توثيق جوي بالدرون وزوايا أرضية لتطوير وبنية مخطط البدرية</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.6 انوفيست (2) -->
+        <div class="work-card" data-category="construction" data-video-id="1YtlyHO_5MwIr9Sqb3drGG9t3ANuFGvHi">
+          <span class="work-cat-badge">شركات البناء والإسكان</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1YtlyHO_5MwIr9Sqb3drGG9t3ANuFGvHi&sz=w1200" alt="انوفيست — الإنجازات (2)" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>انوفيست — إنجازات وتطوير (2)</h3>
+              <p>سرد مرئي يبرز معايير الإتقان والتنفيذ الهندسي لمشاريع انوفيست</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             2. وزارة الرياضة (عملان)
+             ============================================== -->
+        <!-- 2.1 نادي الترجي بالقطيف -->
+        <div class="work-card" data-category="sports" data-video-id="11LAomlpcwyhLRgaUCwyaRiocfiDDHUOu">
+          <span class="work-cat-badge">وزارة الرياضة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=11LAomlpcwyhLRgaUCwyaRiocfiDDHUOu&sz=w1200" alt="نادي الترجي بالقطيف" onerror="this.src='https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>نادي الترجي بالقطيف</h3>
+              <p>تغطية حماسية سينمائية لأنشطة وتدريبات وجماهير نادي الترجي</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.2 نادي القادسية -->
+        <div class="work-card" data-category="sports" data-video-id="1iai-FCFxCNCjDan6fuzfTriJs7WTNK4s">
+          <span class="work-cat-badge">وزارة الرياضة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1iai-FCFxCNCjDan6fuzfTriJs7WTNK4s&sz=w1200" alt="نادي القادسية" onerror="this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>نادي القادسية الرياضي</h3>
+              <p>مونتاج وتصوير ديناميكي عالي السرعة لفعاليات وبطولات القادسية</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             3. وزارة الصحة (7 أعمال)
+             ============================================== -->
+        <!-- 3.1 مستشفى سليمان الحبيب -->
+        <div class="work-card" data-category="health" data-video-id="1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk">
+          <span class="work-cat-badge">وزارة الصحة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk&sz=w1200" alt="مستشفى الدكتور سليمان الحبيب" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>مستشفى الدكتور سليمان الحبيب</h3>
+              <p>تصوير سينمائي للمرافق الطبية المتقدمة والكوادر الصحية بأعلى المعايير</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.2 يوم التمريض العالمي (1) -->
+        <div class="work-card" data-category="health" data-video-id="1GsRyVJ3PGJeTg2Otiwyhw5ZMJduKf9UG">
+          <span class="work-cat-badge">وزارة الصحة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1GsRyVJ3PGJeTg2Otiwyhw5ZMJduKf9UG&sz=w1200" alt="يوم التمريض العالمي (1)" onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>يوم التمريض العالمي (الجزء 1)</h3>
+              <p>لمسة سينمائية مؤثرة تحتفي بجهود أبطال التمريض وتضحياتهم الإنسانية</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.3 يوم التمريض العالمي (2) -->
+        <div class="work-card" data-category="health" data-video-id="1hVAe7R3JT1T17nE7IQYodW7AUCW5Q5Gp">
+          <span class="work-cat-badge">وزارة الصحة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1hVAe7R3JT1T17nE7IQYodW7AUCW5Q5Gp&sz=w1200" alt="يوم التمريض العالمي (2)" onerror="this.src='https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>يوم التمريض العالمي (الجزء 2)</h3>
+              <p>توثيق إنساني ملهم للرعاية الصحية والعطاء في اليوم العالمي للتمريض</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.4 الجودة مجمع الدمام الطبي -->
+        <div class="work-card" data-category="health" data-video-id="1nItIq5RkNcu5URWzK60GY2T0lwB4YmS5">
+          <span class="work-cat-badge">وزارة الصحة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1nItIq5RkNcu5URWzK60GY2T0lwB4YmS5&sz=w1200" alt="الجودة مجمع الدمام الطبي" onerror="this.src='https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>الجودة — مجمع الدمام الطبي</h3>
+              <p>استعراض معايير الجودة والتميز المؤسسي في تقديم الرعاية الصحية الشاملة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.5 الشبو (حملة توعوية) -->
+        <div class="work-card" data-category="health" data-video-id="18nDiPF_ChaXi8qRYnGhn6QjD-7mrRYM9">
+          <span class="work-cat-badge">وزارة الصحة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=18nDiPF_ChaXi8qRYnGhn6QjD-7mrRYM9&sz=w1200" alt="حملة مكافحة الشبو" onerror="this.src='https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>حملة التوعية بمخاطر الشبو</h3>
+              <p>فيلم توعوي مؤثر بسرد سينمائي قوي ورسالة حازمة لحماية المجتمع</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.6 الصحة السكانية -->
+        <div class="work-card" data-category="health" data-video-id="10N8wX2Ll7oigEj4Ohr4ygP6UrQG9sIQ8">
+          <span class="work-cat-badge">وزارة الصحة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=10N8wX2Ll7oigEj4Ohr4ygP6UrQG9sIQ8&sz=w1200" alt="الصحة السكانية" onerror="this.src='https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>مبادرة الصحة السكانية</h3>
+              <p>استعراض استراتيجيات وبرامج الصحة السكانية والوقائية المجتمعية</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.7 زيارة الوزير -->
+        <div class="work-card" data-category="health" data-video-id="1N_uUypqERSyya0vl5zzXbKsKd9oJ2-yR">
+          <span class="work-cat-badge">وزارة الصحة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1N_uUypqERSyya0vl5zzXbKsKd9oJ2-yR&sz=w1200" alt="زيارة معالي وزير الصحة" onerror="this.src='https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>تغطية زيارة معالي الوزير</h3>
+              <p>توثيق بروتوكولي رفيع المستوى لزيارة معالي وزير الصحة والوفد المرافق</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             4. وزارة التعليم (عمل واحد)
+             ============================================== -->
+        <!-- 4.1 فلم قصير التعليم -->
+        <div class="work-card" data-category="education" data-video-id="1QbhPZKanSoDJP40HT-mZuYJV-LBEHZYt">
+          <span class="work-cat-badge">وزارة التعليم</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1QbhPZKanSoDJP40HT-mZuYJV-LBEHZYt&sz=w1200" alt="فيلم قصير — التعليم" onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>فيلم قصير — رحلة التعليم</h3>
+              <p>معالجة درامية سينمائية تبرز شغف التعلم وبناء أجيال المستقبل</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             5. الشركات والمؤسسات (5 أعمال)
+             ============================================== -->
+        <!-- 5.1 سينوبك (SINOPEC) -->
+        <div class="work-card" data-category="corporate" data-video-id="1VjUuvHxnAnV6AwECvSbrfp9FGCWCEJI3">
+          <span class="work-cat-badge">الشركات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1VjUuvHxnAnV6AwECvSbrfp9FGCWCEJI3&sz=w1200" alt="شركة سينوبك العالمية" onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>شركة سينوبك (SINOPEC)</h3>
+              <p>فيلم تعريفي بالعمليات التشغيلية والصناعية للشركة العالمية الرائدة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.2 أرامكو السعودية -->
+        <div class="work-card" data-category="corporate" data-video-id="1GUHCX_GFLMlqNkfBvuVifv88XW-eF5Bb">
+          <span class="work-cat-badge">الشركات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1GUHCX_GFLMlqNkfBvuVifv88XW-eF5Bb&sz=w1200" alt="أرامكو السعودية" onerror="this.src='https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>أرامكو السعودية</h3>
+              <p>إنتاج صناعي ووثائقي رفيع المستوى يعكس هيبة ومكانة عملاق الطاقة العالمي</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.3 شركة العطيشان -->
+        <div class="work-card" data-category="corporate" data-video-id="1L_zEsX0LFNYO_OR7HxctqxspbCybDZDC">
+          <span class="work-cat-badge">الشركات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1L_zEsX0LFNYO_OR7HxctqxspbCybDZDC&sz=w1200" alt="شركة العطيشان" onerror="this.src='https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>شركة العطيشان</h3>
+              <p>استعراض الأسطول والقدرات اللوجستية والإنشائية لشركة العطيشان</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.4 النيازك -->
+        <div class="work-card" data-category="corporate" data-video-id="1RcYe3El87MuoY7pbAIrh47jd3-TfNwmD">
+          <span class="work-cat-badge">الشركات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1RcYe3El87MuoY7pbAIrh47jd3-TfNwmD&sz=w1200" alt="شركة النيازك" onerror="this.src='https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>شركة النيازك</h3>
+              <p>إبراز أنشطة وخدمات شركة النيازك برؤية سينمائية تسويقية متجددة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5.5 فرضية مطار الملك فهد بالدمام -->
+        <div class="work-card" data-category="corporate" data-video-id="1k_-2IcDgMjUD5goYtFMnohP2j7RNlmOB">
+          <span class="work-cat-badge">الشركات والمطارات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1k_-2IcDgMjUD5goYtFMnohP2j7RNlmOB&sz=w1200" alt="فرضية مطار الملك فهد بالدمام" onerror="this.src='https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>فرضية مطار الملك فهد بالدمام</h3>
+              <p>توثيق سينمائي تكتيكي لفرضيات الطوارئ والسلامة بجاهزية احترافية</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             6. اليوم الوطني والمناسبات الثقافية (4 أعمال)
+             ============================================== -->
+        <!-- 6.1 اليوم الوطني (1) -->
+        <div class="work-card" data-category="national" data-video-id="1PZF1T87poIpqkNkifBTFaC33V5AkNNOm">
+          <span class="work-cat-badge">اليوم الوطني</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1PZF1T87poIpqkNkifBTFaC33V5AkNNOm&sz=w1200" alt="ملحمة اليوم الوطني (1)" onerror="this.src='https://images.unsplash.com/photo-1569974498991-d3c12a504f95?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>ملحمة اليوم الوطني السينمائية (1)</h3>
+              <p>إنتاج وطني ضخم يعكس شموخ الهوية وعراقة التاريخ بكاميرات سينمائية وتلوين عالمي</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6.2 اليوم الوطني (2) -->
+        <div class="work-card" data-category="national" data-video-id="10VrcgfOotL_291UxM02Ybw0j4jFf51Vt">
+          <span class="work-cat-badge">اليوم الوطني</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=10VrcgfOotL_291UxM02Ybw0j4jFf51Vt&sz=w1200" alt="احتفالات اليوم الوطني (2)" onerror="this.src='https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>احتفالات اليوم الوطني والفعاليات (2)</h3>
+              <p>تغطية كرنفالية مبهجة وتوثيق اللحظات الوطنية المشرفة مع الجمهور</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6.3 اليوم الوطني (3) -->
+        <div class="work-card" data-category="national" data-video-id="1a7C-lbLVklAG8QhuA3yTJPEfUNJDrDO9">
+          <span class="work-cat-badge">اليوم الوطني</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1a7C-lbLVklAG8QhuA3yTJPEfUNJDrDO9&sz=w1200" alt="مشاعر الوطن (3)" onerror="this.src='https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>مشاعر الوطن والفخر (3)</h3>
+              <p>مشاعر اعتزاز وفرح بألوان وتكوينات بصرية سينمائية متناسقة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6.4 رواية أنياب ناعمة -->
+        <div class="work-card" data-category="national" data-video-id="1jSCClwyEHlsMlhyDUwrNgDec9qg6td2-">
+          <span class="work-cat-badge">الأدب والثقافة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1jSCClwyEHlsMlhyDUwrNgDec9qg6td2-&sz=w1200" alt="رواية أنياب ناعمة" onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>برومو رواية أنياب ناعمة</h3>
+              <p>معالجة سينمائية سردية مشوقة للعمل الأدبي والروائي المتميز</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             7. الجامعات (عمل واحد)
+             ============================================== -->
+        <!-- 7.1 جامعة الإمام عبدالرحمن -->
+        <div class="work-card" data-category="universities" data-video-id="1TPAcWCyiM24dT3lF11vdVBtWJr3ZPciR">
+          <span class="work-cat-badge">الجامعات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1TPAcWCyiM24dT3lF11vdVBtWJr3ZPciR&sz=w1200" alt="جامعة الإمام عبدالرحمن بن فيصل" onerror="this.src='https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>جامعة الإمام عبدالرحمن بن فيصل</h3>
+              <p>استعراض سينمائي للصروح الأكاديمية والبحثية والمسيرة التعليمية الرائدة</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             8. المطاعم والكافيهات (3 أعمال بما فيها المقطع المحدث)
+             ============================================== -->
+        <!-- 8.1 العمل الجديد للمطاعم والكافيهات -->
+        <div class="work-card" data-category="hospitality" data-video-id="1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N">
+          <span class="work-cat-badge">المطاعم والكافيهات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N&sz=w1200" alt="المطاعم والمقاهي السينمائية" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>إنتاج وتغطية المطاعم والمقاهي</h3>
+              <p>إبراز تفاصيل الأطباق الفاخرة وأجواء المكان برؤية تسويقية سينمائية جذابة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8.2 مطعم خان الريحان -->
+        <div class="work-card" data-category="hospitality" data-video-id="1BGPcCaOBY2PX329H06uEYOuJMAskYiWU">
+          <span class="work-cat-badge">المطاعم والكافيهات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1BGPcCaOBY2PX329H06uEYOuJMAskYiWU&sz=w1200" alt="مطعم خان الريحان" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>مطعم خان الريحان</h3>
+              <p>إبراز تفاصيل الطهي والأطباق الفاخرة وأجواء الضيافة برؤية تسويقية جاذبة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8.3 كوفي مانتروز -->
+        <div class="work-card" data-category="hospitality" data-video-id="1cPQDYxnJ8Or8ll8q1tjCVS2OAmwWDQpd">
+          <span class="work-cat-badge">المطاعم والكافيهات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1cPQDYxnJ8Or8ll8q1tjCVS2OAmwWDQpd&sz=w1200" alt="كوفي مانتروز" onerror="this.src='https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>كافيه مانتروز (Montrose Coffee)</h3>
+              <p>تصوير لايف ستايل سينمائي للقهوة المختصة والأجواء العصرية الراقية</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             9. رمضان والمواسم (عمل واحد)
+             ============================================== -->
+        <!-- 9.1 التجمع الصحي الأول - رمضان -->
+        <div class="work-card" data-category="ramadan" data-video-id="1a8XwPz_WIt9tyTy7uUAXw_6JlmAW0fMi">
+          <span class="work-cat-badge">رمضان والمواسم</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1a8XwPz_WIt9tyTy7uUAXw_6JlmAW0fMi&sz=w1200" alt="التجمع الصحي الأول — رمضان" onerror="this.src='https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>التجمع الصحي الأول — شهر رمضان المبارك</h3>
+              <p>إنتاج موسمي رمضاني دافئ يمزج بين الروحانية والتوعية الصحية المجتمعية</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             10. الزواجات والأفراح (عملان)
+             ============================================== -->
+        <!-- 10.1 الزواجات -->
+        <div class="work-card" data-category="weddings" data-video-id="1VHNNUkeugR5NLY1bTNO4Owsk1LtR8wu7">
+          <span class="work-cat-badge">الزواجات والأفراح</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1VHNNUkeugR5NLY1bTNO4Owsk1LtR8wu7&sz=w1200" alt="توثيق حفلات الزواج" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>توثيق حفلات الزواج السينمائي</h3>
+              <p>لقطات شاعرية فاخرة تخلد أدق تفاصيل ليلة العمر برؤية سينمائية خالدة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10.2 الأفراح -->
+        <div class="work-card" data-category="weddings" data-video-id="1BYBrWgH8iLAIZbI3AUWKkZb7az3TG7RG">
+          <span class="work-cat-badge">الزواجات والأفراح</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1BYBrWgH8iLAIZbI3AUWKkZb7az3TG7RG&sz=w1200" alt="بهجة الأفراح والمناسبات" onerror="this.src='https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>بهجة الأفراح والمناسبات العائلية</h3>
+              <p>برومو استعراضي ينبض بالمشاعر والابتسامات وتفاصيل الفرح الأصيل</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             11. البرامج التلفزيونية والوثائقية (3 أعمال)
+             ============================================== -->
+        <!-- 11.1 صحتك مع وليد -->
+        <div class="work-card" data-category="tv" data-video-id="19xpFZj_t7aWRjMOVF8oAxgNiN1bg7wi_">
+          <span class="work-cat-badge">البرامج التلفزيونية</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=19xpFZj_t7aWRjMOVF8oAxgNiN1bg7wi_&sz=w1200" alt="برنامج صحتك مع وليد" onerror="this.src='https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>برنامج صحتك مع وليد</h3>
+              <p>إنتاج تلفزيوني استوديو احترافي متعدد الكاميرات بإضاءة برودكاست متقدمة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11.2 ملوك وعظماء -->
+        <div class="work-card" data-category="tv" data-video-id="12Sjo2SDd_sMnYDIIINudANR-7FSKakq9">
+          <span class="work-cat-badge">الأفلام والوثائقي</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=12Sjo2SDd_sMnYDIIINudANR-7FSKakq9&sz=w1200" alt="الوثائقي: ملوك وعظماء" onerror="this.src='https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>الوثائقي: ملوك وعظماء</h3>
+              <p>سرد تاريخي ملحمي بزوايا تصوير سينمائية مبهرة وتلوين درامي آسر</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11.3 تراث القطيف -->
+        <div class="work-card" data-category="tv" data-video-id="1DutX5MhjhE2l-uMCOKdqJN9dwxuPpqDL">
+          <span class="work-cat-badge">البرامج التلفزيونية</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1DutX5MhjhE2l-uMCOKdqJN9dwxuPpqDL&sz=w1200" alt="برنامج تراث القطيف" onerror="this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>برنامج تراث القطيف الأصيل</h3>
+              <p>استكشاف عبق التاريخ والأصالة التراثية في المنطقة بسرد مرئي غني وممتع</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ==============================================
+             12. موشن جرافيك (عمل واحد)
+             ============================================== -->
+        <!-- 12.1 موشن جرافيك فتنة -->
+        <div class="work-card" data-category="motion" data-video-id="11Faf3gfo9PzTgQPUY_ZPbDcgyamWxnEr">
+          <span class="work-cat-badge">موشن جرافيك</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=11Faf3gfo9PzTgQPUY_ZPbDcgyamWxnEr&sz=w1200" alt="موشن جرافيك فتنة" onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="work-info-overlay">
+            <div class="work-info">
+              <h3>موشن جرافيك — فتنة</h3>
+              <p>تحريك بصري رقمي متقدم ومؤثرات جرافيكية ذات طابع سينمائي معاصر</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Banner -->
+      <div class="cta-banner">
+        <h2>جاهز لتبدأ إنتاج مشروعك معنا؟</h2>
+        <p>نحن نحول فكرتك إلى محتوى سينمائي مؤثر يترك أثراً استثنائياً لدى جمهورك</p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="booking.html" class="btn btn-gold">احجز باقتك الآن</a>
+          <a href="https://drive.google.com/drive/folders/1JwSXjmtkpBH6EDHrK4jOenSlqXWTTfOd?usp=sharing" class="btn btn-outline-gold" target="_blank" rel="noopener">مجلد الأرشيف الكامل في Google Drive</a>
+          <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">تحدث مع المخرج عبر واتساب</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Video Modal / Lightbox -->
+  <div id="videoModal" class="video-modal" aria-hidden="true">
+    <div class="modal-content-wrap">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="إغلاق">&times;</button>
+      <div class="modal-aspect">
+        <iframe id="modalIframe" src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/966594589685" class="floating-wa" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo" dir="ltr">GOLDEN LENS STUDIO</div>
+      <div class="footer-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="works.html">معرض الأعمال</a>
+        <a href="booking.html">حجز موعد</a>
+        <a href="https://instagram.com/goldenlens.sa" target="_blank" rel="noopener">إنستغرام</a>
+      </div>
+      <p>جميع الحقوق محفوظة &copy; 2026 GOLDEN LENS STUDIO</p>
+    </div>
+  </footer>
+
+  <script>
+    // Filtering Logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const workCards = document.querySelectorAll('.work-card');
+    const statusBar = document.getElementById('worksStatusBar');
+
+    function applyFilter(category, buttonEl) {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      if (buttonEl) {
+        buttonEl.classList.add('active');
+      }
+
+      let visibleCount = 0;
+      workCards.forEach(card => {
+        const matches = (category === 'all' || card.getAttribute('data-category') === category);
+        if (matches) {
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (statusBar) {
+        const catName = buttonEl ? buttonEl.querySelector('span:first-child').textContent.trim() : 'المحدد';
+        if (category === 'all') {
+          statusBar.textContent = `يتم عرض جميع الأعمال (${visibleCount} عمل إنتاجي) — اضغط على أي عمل للمشاهدة`;
+        } else {
+          statusBar.textContent = `تم تصفية الأعمال: ${catName} (${visibleCount} أعمال متوفرة)`;
+        }
+      }
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        applyFilter(filter, btn);
+      });
+    });
+
+    // Check URL query parameters (e.g., works.html?filter=china or ?filter=corporate)
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialFilter = urlParams.get('filter') || urlParams.get('cat');
+      if (initialFilter) {
+        const targetBtn = document.querySelector(`.filter-btn[data-filter="${initialFilter}"]`);
+        if (targetBtn) {
+          applyFilter(initialFilter, targetBtn);
+        }
+      }
+    });
+
+    // Modal video logic
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('modalIframe');
+    const closeBtn = document.getElementById('modalCloseBtn');
+
+    workCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const vidId = card.getAttribute('data-video-id');
+        if (vidId) {
+          iframe.src = `https://drive.google.com/file/d/${vidId}/preview`;
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          if (window.gsap) {
+            gsap.fromTo('.modal-content-wrap',
+              { scale: 0.88, opacity: 0, y: 20 },
+              { scale: 1, opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }
+            );
+          }
+        }
+      });
+    });
+
+    function closeModal() {
+      if (window.gsap) {
+        gsap.to('.modal-content-wrap', {
+          scale: 0.9,
+          opacity: 0,
+          duration: 0.25,
+          ease: 'power2.in',
+          onComplete: () => {
+            modal.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = '';
+          }
+        });
+      } else {
+        modal.classList.remove('active');
+        iframe.src = '';
+        document.body.style.overflow = '';
+      }
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    // Mobile burger toggle
+    const burger = document.getElementById('burgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    burger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+  </script>
+
+  <!-- GSAP Suite & Interactions -->
+  <script src="animations.js"></script>
+</body>
+</html>

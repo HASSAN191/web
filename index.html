@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOLDEN LENS STUDIO | إنتاج مرئي وصناعة محتوى سينمائي</title>
+
+  <!-- Instant Theme Loader (Zero flicker) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('goldenlens_theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- GSAP Core & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Importmap to enable `import { gsap } from "gsap";` in all browser ES modules -->
+  <script type="importmap">
+  {
+    "imports": {
+      "gsap": "https://esm.sh/gsap@3.12.5",
+      "gsap/ScrollTrigger": "https://esm.sh/gsap@3.12.5/ScrollTrigger"
+    }
+  }
+  </script>
+  <style>
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 20px 50px;
+      background: radial-gradient(circle at 50% 25%, rgba(197, 160, 89, 0.12) 0%, transparent 65%),
+                  linear-gradient(180deg, #0a0b0e 0%, #101217 60%, #0a0b0e 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(197, 160, 89, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(197, 160, 89, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 35%, transparent 75%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 3.5px;
+      color: var(--gold-light);
+      background: rgba(197, 160, 89, 0.1);
+      border: 1px solid var(--border-gold-strong);
+      padding: 6px 20px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 22px;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6.2vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.22;
+      color: var(--text-cream);
+      margin-bottom: 18px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 70%, var(--gold-dark) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 34px;
+      line-height: 1.85;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Sections */
+    .section-pad {
+      padding: 55px 0;
+      border-top: 1px solid var(--border-gold);
+      position: relative;
+    }
+
+    /* Photo Showcase Grid (100% Photos, Zero Videos) */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 22px;
+    }
+
+    .photo-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      grid-column: span 4;
+      display: block;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .photo-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 160, 89, 0.2);
+    }
+
+    .photo-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .photo-card:hover .photo-card-img {
+      transform: scale(1.06);
+    }
+
+    .photo-card-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(10, 11, 14, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      z-index: 5;
+    }
+
+    .photo-card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px 18px 16px;
+      background: linear-gradient(to top, rgba(10, 11, 14, 0.95) 0%, rgba(10, 11, 14, 0.45) 60%, transparent 100%);
+      z-index: 4;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .photo-card-text h3 {
+      font-size: 1.15rem;
+      color: var(--text-cream);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .photo-card-text p {
+      font-size: 0.82rem;
+      color: var(--gold-light);
+    }
+
+    .photo-card-link-icon {
+      color: var(--gold-primary);
+      font-size: 1.3rem;
+      transition: transform 0.3s;
+    }
+
+    .photo-card:hover .photo-card-link-icon {
+      transform: translateX(-4px);
+    }
+
+    .view-all-works-box {
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    .btn-all-works {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(197, 160, 89, 0.08);
+      border: 1.5px solid var(--gold-primary);
+      color: var(--gold-light);
+      padding: 15px 36px;
+      border-radius: var(--radius-pill);
+      font-size: 1.05rem;
+      font-weight: 800;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+      transition: var(--transition);
+    }
+
+    .btn-all-works:hover {
+      background: var(--gold-primary);
+      color: #0a0b0e;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(197, 160, 89, 0.45);
+    }
+
+    /* About Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .about-highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .highlight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      color: var(--text-cream);
+      text-align: center;
+      border-right: 3px solid var(--gold-primary);
+      font-size: 0.95rem;
+    }
+
+    .why-us-box {
+      background: radial-gradient(ellipse at center, rgba(197, 160, 89, 0.08) 0%, var(--bg-card) 75%);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+    }
+
+    .why-us-box h3 {
+      font-size: 1.45rem;
+      color: var(--gold-light);
+      margin-bottom: 14px;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 26px 20px;
+      text-align: center;
+      transition: var(--transition);
+      display: block;
+      text-decoration: none;
+    }
+
+    .service-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+    }
+
+    .service-card-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(197, 160, 89, 0.1);
+      border-radius: 50%;
+      border: 1px solid var(--border-gold);
+      color: var(--gold-primary);
+    }
+
+    .service-card-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      color: var(--text-cream);
+      margin-bottom: 6px;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Packages */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 26px;
+    }
+
+    .pkg-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 34px 26px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .pkg-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+    }
+
+    .pkg-card.popular {
+      border-color: var(--gold-primary);
+      background: radial-gradient(ellipse at 50% 0%, rgba(197, 160, 89, 0.12) 0%, var(--bg-card) 70%);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(197, 160, 89, 0.15);
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: #0a0b0e;
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 3px 16px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+    }
+
+    .pkg-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-cream);
+      margin-bottom: 4px;
+    }
+
+    .pkg-target {
+      color: var(--gold-primary);
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+    }
+
+    .pkg-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      min-height: 44px;
+    }
+
+    .pkg-features {
+      list-style: none;
+      margin-bottom: 26px;
+      flex-grow: 1;
+    }
+
+    .pkg-features li {
+      position: relative;
+      padding-right: 22px;
+      color: var(--text-cream);
+      font-size: 0.88rem;
+      margin-bottom: 10px;
+      line-height: 1.55;
+    }
+
+    .pkg-features li::before {
+      content: "✓";
+      position: absolute;
+      right: 0;
+      color: var(--gold-primary);
+      font-weight: 900;
+    }
+
+    @media (max-width: 1024px) {
+      .photo-card { grid-column: span 6; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 26px auto 0; }
+    }
+
+    @media (max-width: 600px) {
+      .photo-card { grid-column: span 12; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo-brand" dir="ltr">
+        GOLDEN <span>LENS</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">الرئيسية</a></li>
+        <li><a href="works.html">معرض الأعمال</a></li>
+        <li><a href="#about">من نحن</a></li>
+        <li><a href="#services">الخدمات</a></li>
+        <li><a href="booking.html">اطلب عرض سعر</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle Button (Dark / Light) -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="تبديل الوضع الليلي / النهاري" title="تبديل الوضع">
+          <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <a href="booking.html" class="btn btn-gold">احجز مشروعك</a>
+        <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+          واتساب
+        </a>
+        <button class="burger" id="burgerBtn" aria-label="القائمة">&#9776;</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="hero">
+    <div class="container" style="position:relative; z-index:2;">
+      <div class="hero-badge">STUDIO · CINEMATIC PRODUCTION</div>
+      <h1 class="hero-title">GOLDEN <span>LENS</span> STUDIO</h1>
+      <p class="hero-desc">
+        نصنع الصورة السينمائية بعين احترافية — من الفكرة والتصوير إلى المونتاج والتلوين السينمائي، نروي قصتك بجودة تليق بمشروعك.
+      </p>
+      <div class="hero-actions">
+        <a href="booking.html" class="btn btn-gold">احجز باقتك الآن</a>
+        <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+          تواصل مباشر واتساب
+        </a>
+        <a href="works.html" class="btn btn-outline-gold">استعراض كافة الأعمال المصنفة (36 عمل)</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Photo Showcase Section (100% Photos Only - No Videos) -->
+  <section id="portfolio" class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Cinematic Visuals</span>
+        <h2 class="section-title">لقطات سينمائية مختارة من قطاعاتنا</h2>
+        <p class="section-desc">نظرة فوتوغرافية سريعة على جودة وتنوع أعمالنا — اضغط على أي قطاع للاطلاع على كافة فيديوهاته في المعرض</p>
+      </div>
+
+      <div class="photo-grid">
+
+        <!-- 1. Corporate / Companies -->
+        <a href="works.html?filter=corporate" class="photo-card">
+          <span class="photo-card-tag">الشركات والمؤسسات</span>
+          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1GUHCX_GFLMlqNkfBvuVifv88XW-eF5Bb&sz=w1200" alt="إنتاج الشركات والمؤسسات" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80'">
+          <div class="photo-card-overlay">
+            <div class="photo-card-text">
+              <h3>الشركات والمؤسسات الكبرى</h3>
+              <p>أرامكو، سينوبك، مطار الدمام، العطيشان (5 أعمال)</p>
+            </div>
+            <div class="photo-card-link-icon">&larr;</div>
+          </div>
+        </a>
+
+        <!-- 2. Health Sector -->
+        <a href="works.html?filter=health" class="photo-card">
+          <span class="photo-card-tag">وزارة الصحة</span>
+          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk&sz=w1200" alt="القطاع الصحي والطب" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80'">
+          <div class="photo-card-overlay">
+            <div class="photo-card-text">
+              <h3>القطاع الصحي والمستشفيات</h3>
+              <p>مستشفى سليمان الحبيب، التجمع الصحي (7 أعمال)</p>
+            </div>
+            <div class="photo-card-link-icon">&larr;</div>
+          </div>
+        </a>
+
+        <!-- 3. Construction & Real Estate -->
+        <a href="works.html?filter=construction" class="photo-card">
+          <span class="photo-card-tag">شركات البناء والإسكان</span>
+          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-&sz=w1200" alt="شركات البناء والإسكان" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d0fbb18615f7?auto=format&fit=crop&w=1200&q=80'">
+          <div class="photo-card-overlay">
+            <div class="photo-card-text">
+              <h3>البناء والإسكان والتطوير</h3>
+              <p>شركة السديم، انوفيست، مخطط البدرية (6 أعمال)</p>
+            </div>
+            <div class="photo-card-link-icon">&larr;</div>
+          </div>
+        </a>
+
+        <!-- 4. Sports -->
+        <a href="works.html?filter=sports" class="photo-card">
+          <span class="photo-card-tag">وزارة الرياضة</span>
+          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1iai-FCFxCNCjDan6fuzfTriJs7WTNK4s&sz=w1200" alt="الأندية الرياضية" onerror="this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80'">
+          <div class="photo-card-overlay">
+            <div class="photo-card-text">
+              <h3>الرياضة والأندية المحترفة</h3>
+              <p>نادي القادسية، نادي الترجي بالقطيف (عملان)</p>
+            </div>
+            <div class="photo-card-link-icon">&larr;</div>
+          </div>
+        </a>
+
+        <!-- 5. Hospitality / Cafes & Restaurants (تم تحديثها بالرابط الجديد المحدد) -->
+        <a href="works.html?filter=hospitality" class="photo-card">
+          <span class="photo-card-tag">المطاعم والكافيهات</span>
+          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N&sz=w1200" alt="المطاعم والكافيهات السينمائية" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80'">
+          <div class="photo-card-overlay">
+            <div class="photo-card-text">
+              <h3>المطاعم والمقاهي الفاخرة</h3>
+              <p>تغطيات سينمائية لأفخم المطاعم والضيافة</p>
+            </div>
+            <div class="photo-card-link-icon">&larr;</div>
+          </div>
+        </a>
+
+        <!-- 6. Weddings & Celebrations -->
+        <a href="works.html?filter=weddings" class="photo-card">
+          <span class="photo-card-tag">الزواجات والأفراح</span>
+          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1VHNNUkeugR5NLY1bTNO4Owsk1LtR8wu7&sz=w1200" alt="الزواجات والأفراح" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80'">
+          <div class="photo-card-overlay">
+            <div class="photo-card-text">
+              <h3>توثيق الزواجات والأفراح</h3>
+              <p>بروموهات سينمائية وتوثيق راقٍ لليلة العمر (عملان)</p>
+            </div>
+            <div class="photo-card-link-icon">&larr;</div>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Action Button to Dedicated Works Page -->
+      <div class="view-all-works-box">
+        <a href="works.html" class="btn-all-works">
+          <span>استعراض كافة الأعمال والفيديوهات الـ 36 في صفحة المعرض المستقلة</span>
+          <span style="font-size:1.3rem;">&larr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section-pad">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <span class="section-tag">About</span>
+          <h2 class="section-title">مو مجرد استوديو تصوير</h2>
+          <p class="section-desc" style="margin: 0 0 18px 0; max-width:none;">
+            جولدن لينس استوديو إنتاج مرئي متكامل — نغطي كل احتياجاتك من الإعلانات التجارية والمؤسسات، للأعراس والمناسبات، إلى المحتوى المستمر للمطاعم والبودكاست والقطاع الصحي والعقار.
+          </p>
+          <p style="color: var(--text-muted); margin-bottom: 22px; font-size:0.95rem;">
+            ما نسلمك تصوير خام وخلاص. فريقنا يتولى مشروعك من بلورة الفكرة، للتصوير السينمائي 4K، للمونتاج والتلوين الاحترافي، وصولاً للتسليم النهائي بمعايير عالمية.
+          </p>
+          <div class="about-highlights">
+            <div class="highlight-card">تصوير سينمائي 4K</div>
+            <div class="highlight-card">تلوين احترافي</div>
+            <div class="highlight-card">إدارة كاملة للمشروع</div>
+          </div>
+        </div>
+
+        <div class="why-us-box">
+          <h3>ليش تختار فريق واحد يسوي كل شي؟</h3>
+          <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.8;">
+            لما التصوير والمونتاج والتلوين يطلعون من نفس الفريق، النتيجة تطلع متناسقة ومتقنة من أول ثانية لآخر كادر — بدون تشتت بين جهات مختلفة أو فقدان لهوية المشروع البصرية.
+          </p>
+          <div style="margin-top:22px;">
+            <a href="booking.html" class="btn btn-gold" style="width:100%; text-align:center;">احجز استشارتك ومشروعك الآن</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Services</span>
+        <h2 class="section-title">خدمات الإنتاج المرئي</h2>
+        <p class="section-desc">حلول إنتاج احترافية متكاملة مصممة لتلبية تطلعاتك التجارية والشخصية</p>
+      </div>
+
+      <div class="services-grid">
+        <a href="booking.html" class="service-card">
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="15" r="5"/><circle cx="15" cy="15" r="5"/><path d="M9 10 12 4 15 10"/></svg>
+          </div>
+          <h3>الأعراس والمناسبات</h3>
+          <p>توثيق فيديو وفوتوغرافي سينمائي مع خيار البث المباشر</p>
+        </a>
+
+        <a href="booking.html" class="service-card">
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M7 3v7a2 2 0 0 0 2 2v9M7 3v4M10 3v4M17 3c-1.5 0-2 2-2 4v3a2 2 0 0 0 2 2v9"/></svg>
+          </div>
+          <h3>المطاعم والمقاهي</h3>
+          <p>تصوير منيو، لايف ستايل، وريلز يعزز مبيعاتك وحضورك</p>
+        </a>
+
+        <a href="booking.html" class="service-card">
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 10v4a1 1 0 0 0 1 1h2l6 4V5L6 9H4a1 1 0 0 0-1 1z"/><path d="M16 8a4 4 0 0 1 0 8"/><path d="M19 5a8 8 0 0 1 0 14"/></svg>
+          </div>
+          <h3>الإعلانات والشركات</h3>
+          <p>محتوى تسويقي إبداعي يبرز قوة علامتك التجارية للمؤسسات</p>
+        </a>
+
+        <a href="booking.html" class="service-card">
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 20h16M8 20 6 9h12l-2 11M9 9 6 3h12l-3 6"/></svg>
+          </div>
+          <h3>الفعاليات والتغطيات</h3>
+          <p>تغطية شاملة للمعارض، الفعاليات، والمؤتمرات الكبرى</p>
+        </a>
+      </div>
+
+      <div style="text-align:center;">
+        <a href="booking.html" class="btn btn-gold">اطلب عرض سعر مخصص لمشروعك الآن &larr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Contact CTA Section -->
+  <section class="section-pad" style="text-align:center;">
+    <div class="container">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">لنبدأ تصوير مشروعك</h2>
+      <p class="section-desc" style="margin-bottom:30px;">تواصل معنا مباشرة للاستفسار، حجز موعد تصوير، أو طلب باقة مخصصة</p>
+      <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+        <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">تواصل فوري عبر واتساب</a>
+        <a href="booking.html" class="btn btn-gold">حجز الباقة عبر الموقع</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/966594589685" class="floating-wa" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo" dir="ltr">GOLDEN LENS STUDIO</div>
+      <div class="footer-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="works.html">معرض الأعمال الكامل (36 عمل)</a>
+        <a href="booking.html">حجز الباقات وعرض السعر</a>
+        <a href="https://instagram.com/goldenlens.sa" target="_blank" rel="noopener">إنستغرام: @goldenlens.sa</a>
+      </div>
+      <p>جميع الحقوق محفوظة &copy; 2026 GOLDEN LENS STUDIO</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Burger Toggle
+    const burger = document.getElementById('burgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    burger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+  </script>
+
+  <!-- GSAP Suite & Interactions -->
+  <script src="animations.js"></script>
+</body>
+</html>
