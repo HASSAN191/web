@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>معرض الأعمال السينمائية (36 عمل مصنف) | GOLDEN LENS STUDIO</title>
+  <title>معرض الأعمال السينمائية | GOLDEN LENS STUDIO</title>
+
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="تصفح معرض أعمال استوديو جولدن لينس السينمائية: مشاريع وزارة الرياضة، الصحة، التعليم، الشركات الكبرى، المطاعم، وأفلام الصين.">
+  <meta name="keywords" content="معرض أعمال جولدن لينس, مشاريع تصوير, أفلام وثائقية, تصوير مطاعم, تصوير زواجات, إنتاج إعلانات, استوديو تصوير">
+  <meta property="og:title" content="معرض الأعمال السينمائية | GOLDEN LENS STUDIO">
+  <meta property="og:description" content="تصفح أكثر من 35 مشروعاً سينمائياً وتوثيقياً احترافياً نفذها استوديو جولدن لينس.">
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N">
 
   <!-- Instant Theme Loader (Zero flicker) -->
   <script>
@@ -193,6 +200,7 @@
       .work-card { grid-column: span 6; }
     }
     @media (max-width: 640px) {
+      .works-hero { padding: 95px 16px 20px !important; }
       .work-card { grid-column: span 12; }
       .filter-bar { gap: 6px; }
       .filter-btn { padding: 7px 14px; font-size: 0.82rem; }
@@ -215,7 +223,7 @@
         <li><a href="works.html" class="active">الأعمال</a></li>
         <li><a href="index.html#about">من نحن</a></li>
         <li><a href="index.html#services">الخدمات</a></li>
-        <li><a href="booking.html">اطلب عرض سعر</a></li>
+        <li><a href="booking.html" class="nav-booking-link">اطلب عرض سعر</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -225,12 +233,16 @@
           <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
 
-        <a href="booking.html" class="btn btn-outline-gold">احجز مشروعك</a>
-        <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        <a href="booking.html" class="btn btn-gold nav-btn-book">احجز مشروعك</a>
+        <a href="https://wa.me/966594589685" class="btn btn-whatsapp nav-btn-wa" target="_blank" rel="noopener" title="تواصل واتساب">
           <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
-          واتساب
+          <span class="wa-btn-text">واتساب</span>
         </a>
-        <button class="burger" id="burgerBtn" aria-label="القائمة">&#9776;</button>
+        <button class="burger" id="burgerBtn" aria-label="القائمة">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
       </div>
     </div>
   </nav>
@@ -1209,10 +1221,24 @@
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-    // Mobile burger toggle
+    // Mobile burger toggle & Auto-Close
     const burger = document.getElementById('burgerBtn');
     const navLinks = document.getElementById('navLinks');
-    burger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+    if (burger && navLinks) {
+      burger.addEventListener('click', () => {
+        const isOpen = burger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          burger.classList.remove('open');
+          navLinks.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
   </script>
 
   <!-- GSAP Suite & Interactions -->

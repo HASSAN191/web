@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>حجز باقة وطلب عرض سعر | GOLDEN LENS STUDIO</title>
 
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="احسب سعر باقتك واحجز موعدك فوراً مع استوديو جولدن لينس. باقات تصوير الأعراس، باقات المطاعم والمقاهي، خيارات الليوة والبث المباشر.">
+  <meta name="keywords" content="حجز باقة تصوير, اسعار تصوير زواجات, اسعار تصوير مطاعم, عرض سعر استوديو, جولدن لينس, حجز تصوير القطيف الخبر الدمام">
+  <meta property="og:title" content="حجز باقة وطلب عرض سعر فوري | GOLDEN LENS STUDIO">
+  <meta property="og:description" content="حاسبة الأسعار الذكية وحجز باقات التصوير الفوري عبر واتساب.">
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N">
+
   <!-- Instant Theme Loader (Zero flicker) -->
   <script>
     (function(){
@@ -793,6 +800,190 @@
       .input-grid { grid-template-columns: 1fr; }
       .submit-actions { flex-direction: column; }
     }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 640px) {
+      .booking-page {
+        padding: 95px 12px 60px !important;
+      }
+      .booking-wrapper {
+        padding: 22px 14px !important;
+        border-radius: var(--radius-md) !important;
+      }
+      .packages-area {
+        padding: 16px 12px !important;
+        margin-bottom: 22px !important;
+      }
+      .services-select-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+      }
+      .service-select-card {
+        padding: 14px 8px !important;
+      }
+      .service-select-card h4 {
+        font-size: 0.88rem !important;
+      }
+      .pkg-item-card {
+        padding: 18px 14px !important;
+      }
+      .pkg-header-num {
+        font-size: 1.2rem !important;
+      }
+      .pkg-curr-price {
+        font-size: 1.45rem !important;
+      }
+      .addon-card {
+        padding: 14px 12px !important;
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 12px !important;
+      }
+      .addon-left {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .order-summary-box {
+        padding: 18px 14px !important;
+      }
+      .summary-total-price {
+        font-size: 1.6rem !important;
+      }
+      .btn-submit-booking, .btn-quick-wa {
+        padding: 13px 16px !important;
+        font-size: 0.95rem !important;
+      }
+      .steps-pill-bar {
+        gap: 6px !important;
+      }
+      .step-pill {
+        font-size: 0.74rem !important;
+        padding: 5px 10px !important;
+      }
+    }
+
+    /* ========================================================
+       LIGHT MODE OVERRIDES FOR BOOKING PAGE
+       ======================================================== */
+    [data-theme="light"] .booking-wrapper {
+      background: #ffffff !important;
+      border-color: rgba(163, 121, 44, 0.25) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    [data-theme="light"] .custom-input {
+      background: #fdfcf9 !important;
+      color: #111215 !important;
+      border-color: rgba(163, 121, 44, 0.3) !important;
+    }
+
+    [data-theme="light"] .service-select-card {
+      background: #fbf9f4 !important;
+      border-color: rgba(163, 121, 44, 0.2) !important;
+    }
+
+    [data-theme="light"] .service-select-card:hover {
+      background: #f5f0e3 !important;
+    }
+
+    [data-theme="light"] .service-select-card.active {
+      background: rgba(163, 121, 44, 0.12) !important;
+      border-color: var(--gold-primary) !important;
+    }
+
+    [data-theme="light"] .service-select-card h4 {
+      color: #111215 !important;
+    }
+
+    [data-theme="light"] .service-select-card span {
+      color: #555963 !important;
+    }
+
+    [data-theme="light"] .packages-area {
+      background: #fbf9f4 !important;
+      border-color: rgba(163, 121, 44, 0.25) !important;
+    }
+
+    [data-theme="light"] .pkg-item-card {
+      background: #ffffff !important;
+      border-color: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    [data-theme="light"] .pkg-item-card.selected {
+      background: #fffdf7 !important;
+      border-color: var(--gold-primary) !important;
+    }
+
+    [data-theme="light"] .pkg-card-title {
+      color: #111215 !important;
+    }
+
+    [data-theme="light"] .pkg-card-subtitle {
+      color: #555963 !important;
+    }
+
+    [data-theme="light"] .pkg-features-list li {
+      color: #2b2e36 !important;
+    }
+
+    [data-theme="light"] .addon-card {
+      background: #ffffff !important;
+      border-color: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    [data-theme="light"] .addon-card.active {
+      background: #fffdf7 !important;
+      border-color: var(--gold-primary) !important;
+    }
+
+    [data-theme="light"] .addon-info h4 {
+      color: #111215 !important;
+    }
+
+    [data-theme="light"] .addon-info p {
+      color: #555963 !important;
+    }
+
+    [data-theme="light"] .order-summary-box {
+      background: #f7f3e8 !important;
+      border-color: var(--gold-primary) !important;
+      box-shadow: 0 8px 24px rgba(163, 121, 44, 0.12) !important;
+    }
+
+    [data-theme="light"] .summary-title {
+      color: #8b6819 !important;
+    }
+
+    [data-theme="light"] .summary-row {
+      color: #111215 !important;
+    }
+
+    [data-theme="light"] .summary-row span:first-child {
+      color: #555963 !important;
+    }
+
+    [data-theme="light"] .summary-total-row {
+      color: #8b6819 !important;
+      border-top-color: rgba(163, 121, 44, 0.4) !important;
+    }
+
+    [data-theme="light"] .custom-quote-box {
+      background: #ffffff !important;
+    }
+
+    [data-theme="light"] .step-pill {
+      background: #fbf9f4 !important;
+      color: #555963 !important;
+      border-color: rgba(163, 121, 44, 0.25) !important;
+    }
+
+    [data-theme="light"] .step-pill.active {
+      color: #8b6819 !important;
+      border-color: var(--gold-primary) !important;
+      background: rgba(163, 121, 44, 0.08) !important;
+    }
   </style>
 </head>
 <body>
@@ -811,7 +1002,7 @@
         <li><a href="works.html">معرض الأعمال</a></li>
         <li><a href="index.html#about">من نحن</a></li>
         <li><a href="index.html#services">الخدمات</a></li>
-        <li><a href="booking.html" class="active">اطلب عرض سعر</a></li>
+        <li><a href="booking.html" class="active nav-booking-link">اطلب عرض سعر</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -821,11 +1012,16 @@
           <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
 
-        <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        <a href="booking.html" class="btn btn-gold nav-btn-book">احجز مشروعك</a>
+        <a href="https://wa.me/966594589685" class="btn btn-whatsapp nav-btn-wa" target="_blank" rel="noopener" title="تواصل واتساب">
           <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
-          واتساب فوري
+          <span class="wa-btn-text">واتساب</span>
         </a>
-        <button class="burger" id="burgerBtn" aria-label="القائمة">&#9776;</button>
+        <button class="burger" id="burgerBtn" aria-label="القائمة">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
       </div>
     </div>
   </nav>
@@ -1567,10 +1763,24 @@
       });
     }
 
-    // Mobile burger
+    // Mobile burger & Auto-Close
     const burger = document.getElementById('burgerBtn');
     const navLinks = document.getElementById('navLinks');
-    burger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+    if (burger && navLinks) {
+      burger.addEventListener('click', () => {
+        const isOpen = burger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          burger.classList.remove('open');
+          navLinks.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
   </script>
 
   <!-- GSAP Suite & Interactions -->

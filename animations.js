@@ -41,7 +41,7 @@
   function setup3DCardTilt(g) {
     if (!window.matchMedia || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
-    var cards = document.querySelectorAll(".portfolio-item, .work-card, .photo-card, .pkg-card, .pkg-item-card, .service-card");
+    var cards = document.querySelectorAll(".portfolio-item, .work-card, .video-card, .photo-card, .pkg-card, .pkg-item-card, .service-card");
 
     cards.forEach(function (card) {
       card.addEventListener("mousemove", function (e) {

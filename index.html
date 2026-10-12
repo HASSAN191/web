@@ -5,6 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GOLDEN LENS STUDIO | إنتاج مرئي وصناعة محتوى سينمائي</title>
 
+  <!-- SEO & Search Engine Optimization -->
+  <meta name="description" content="استوديو جولدن لينس (Golden Lens Studio) — استوديو إنتاج سينمائي وتصوير احترافي للأعراس، المطاعم والمقاهي، الإعلانات التجارية، والفعاليات في السعودية والمنطقة الشرقية.">
+  <meta name="keywords" content="استوديو تصوير, جولدن لينس, Golden Lens Studio, تصوير زواجات, تصوير اعراس, تصوير مطاعم, تصوير مقاهي, انتاج سينمائي, تغطية فعاليات, تصوير الخبر, تصوير الدمام, تصوير القطيف, تصوير الرياض, فوتوغرافي, فيديو سينمائي, عروض تصوير">
+  <meta name="author" content="GOLDEN LENS STUDIO">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / WhatsApp Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GOLDEN LENS STUDIO | استوديو إنتاج سينمائي وتصوير">
+  <meta property="og:description" content="توثيق سينمائي فاخر للأعراس، والمطاعم، والفعاليات الكبرى. احجز باقتك الآن.">
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N">
+  <meta property="og:locale" content="ar_SA">
+
+  <!-- Twitter Preview -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GOLDEN LENS STUDIO | إنتاج مرئي وتصوير سينمائي">
+  <meta name="twitter:description" content="توثيق سينمائي عالي الجودة للأعراس والمطاعم والفعاليات الكبرى.">
+  <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N">
+
   <!-- Instant Theme Loader (Zero flicker) -->
   <script>
     (function(){
@@ -32,14 +51,19 @@
     /* Hero Section */
     .hero {
       position: relative;
-      min-height: 80vh;
+      min-height: 75vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       padding: 120px 20px 50px;
       background: radial-gradient(circle at 50% 25%, rgba(197, 160, 89, 0.12) 0%, transparent 65%),
-                  linear-gradient(180deg, #0a0b0e 0%, #101217 60%, #0a0b0e 100%);
+                  linear-gradient(180deg, var(--bg-deep) 0%, #101217 60%, var(--bg-deep) 100%);
+    }
+
+    [data-theme="light"] .hero {
+      background: radial-gradient(circle at 50% 25%, rgba(163, 121, 44, 0.12) 0%, transparent 65%),
+                  linear-gradient(180deg, #f7f5ef 0%, #eee8db 60%, #f7f5ef 100%) !important;
     }
 
     .hero::before {
@@ -52,6 +76,12 @@
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse at center, black 35%, transparent 75%);
       pointer-events: none;
+    }
+
+    [data-theme="light"] .hero::before {
+      background-image: 
+        linear-gradient(rgba(163, 121, 44, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(163, 121, 44, 0.05) 1px, transparent 1px) !important;
     }
 
     .hero-badge {
@@ -68,8 +98,14 @@
       font-weight: 700;
     }
 
+    [data-theme="light"] .hero-badge {
+      background: rgba(163, 121, 44, 0.1) !important;
+      border-color: rgba(163, 121, 44, 0.4) !important;
+      color: #7a5818 !important;
+    }
+
     .hero-title {
-      font-size: clamp(2.5rem, 6.2vw, 5rem);
+      font-size: clamp(2.2rem, 5.8vw, 4.8rem);
       font-weight: 900;
       letter-spacing: -0.5px;
       line-height: 1.22;
@@ -84,7 +120,7 @@
     }
 
     .hero-desc {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      font-size: clamp(1rem, 2vw, 1.2rem);
       color: var(--text-muted);
       max-width: 700px;
       margin: 0 auto 34px;
@@ -105,14 +141,14 @@
       position: relative;
     }
 
-    /* Photo Showcase Grid (100% Photos, Zero Videos) */
+    /* Video Showcase Grid (تشغيل فوري في الصفحة الرئيسية) */
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       gap: 22px;
     }
 
-    .photo-card {
+    .video-card {
       position: relative;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -120,18 +156,25 @@
       overflow: hidden;
       aspect-ratio: 16 / 10;
       grid-column: span 4;
-      display: block;
+      cursor: pointer;
       transition: var(--transition);
-      text-decoration: none;
+      display: block;
+      user-select: none;
     }
 
-    .photo-card:hover {
+    .video-card:hover {
       border-color: var(--gold-primary);
       transform: translateY(-5px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 160, 89, 0.2);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 160, 89, 0.25);
     }
 
-    .photo-card-img {
+    .video-card .thumb-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .video-card .thumb-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -139,15 +182,15 @@
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .photo-card:hover .photo-card-img {
+    .video-card:hover .thumb-img {
       transform: scale(1.06);
     }
 
-    .photo-card-tag {
+    .video-card-tag {
       position: absolute;
       top: 14px;
       right: 14px;
-      background: rgba(10, 11, 14, 0.85);
+      background: rgba(10, 11, 14, 0.88);
       backdrop-filter: blur(8px);
       border: 1px solid var(--border-gold);
       color: var(--gold-light);
@@ -158,39 +201,119 @@
       z-index: 5;
     }
 
-    .photo-card-overlay {
+    .video-card .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      z-index: 3;
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.18);
+      transition: var(--transition);
+    }
+
+    .video-card:hover .play-overlay {
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .play-btn-circle {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: rgba(10, 11, 14, 0.8);
+      backdrop-filter: blur(8px);
+      border: 2px solid var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      box-shadow: 0 0 25px rgba(197, 160, 89, 0.4);
+      transition: var(--transition);
+    }
+
+    .video-card:hover .play-btn-circle {
+      transform: scale(1.14);
+      background: var(--gold-primary);
+      color: #000;
+      box-shadow: 0 0 35px rgba(197, 160, 89, 0.75);
+    }
+
+    .play-btn-circle svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+      margin-right: -2px;
+    }
+
+    .play-text-hint {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 3px 12px;
+      border-radius: var(--radius-pill);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .video-card-overlay {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 30px 18px 16px;
-      background: linear-gradient(to top, rgba(10, 11, 14, 0.95) 0%, rgba(10, 11, 14, 0.45) 60%, transparent 100%);
+      padding: 34px 16px 14px;
+      background: linear-gradient(to top, rgba(10, 11, 14, 0.96) 0%, rgba(10, 11, 14, 0.5) 60%, transparent 100%);
       z-index: 4;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
+      gap: 10px;
     }
 
-    .photo-card-text h3 {
+    .video-card-text {
+      flex-grow: 1;
+      text-align: right;
+    }
+
+    .video-card-text h3 {
       font-size: 1.15rem;
-      color: var(--text-cream);
+      color: #ffffff !important;
       font-weight: 700;
       margin-bottom: 2px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
     }
 
-    .photo-card-text p {
+    .video-card-text p {
       font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.88) !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    .goto-gallery-btn {
+      background: rgba(197, 160, 89, 0.2);
+      border: 1px solid var(--border-gold);
       color: var(--gold-light);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
     }
 
-    .photo-card-link-icon {
-      color: var(--gold-primary);
-      font-size: 1.3rem;
-      transition: transform 0.3s;
-    }
-
-    .photo-card:hover .photo-card-link-icon {
-      transform: translateX(-4px);
+    .goto-gallery-btn:hover {
+      background: var(--gold-primary);
+      color: #0a0b0e;
+      border-color: var(--gold-primary);
+      transform: translateY(-2px);
     }
 
     .view-all-works-box {
@@ -404,7 +527,7 @@
     }
 
     @media (max-width: 1024px) {
-      .photo-card { grid-column: span 6; }
+      .video-card { grid-column: span 6; }
       .services-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
@@ -414,7 +537,7 @@
     }
 
     @media (max-width: 600px) {
-      .photo-card { grid-column: span 12; }
+      .video-card { grid-column: span 12; aspect-ratio: 16 / 10; }
       .services-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -435,7 +558,7 @@
         <li><a href="works.html">معرض الأعمال</a></li>
         <li><a href="#about">من نحن</a></li>
         <li><a href="#services">الخدمات</a></li>
-        <li><a href="booking.html">اطلب عرض سعر</a></li>
+        <li><a href="booking.html" class="nav-booking-link">اطلب عرض سعر</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -445,12 +568,16 @@
           <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
 
-        <a href="booking.html" class="btn btn-gold">احجز مشروعك</a>
-        <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        <a href="booking.html" class="btn btn-gold nav-btn-book">احجز مشروعك</a>
+        <a href="https://wa.me/966594589685" class="btn btn-whatsapp nav-btn-wa" target="_blank" rel="noopener" title="تواصل واتساب">
           <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
-          واتساب
+          <span class="wa-btn-text">واتساب</span>
         </a>
-        <button class="burger" id="burgerBtn" aria-label="القائمة">&#9776;</button>
+        <button class="burger" id="burgerBtn" aria-label="القائمة">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
       </div>
     </div>
   </nav>
@@ -474,94 +601,223 @@
     </div>
   </header>
 
-  <!-- Photo Showcase Section (100% Photos Only - No Videos) -->
+  <!-- Video Showcase Section (تشغيل فوري في الصفحة الرئيسية) -->
   <section id="portfolio" class="section-pad">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Cinematic Visuals</span>
+        <span class="section-tag">Cinematic Showcase</span>
         <h2 class="section-title">لقطات سينمائية مختارة من قطاعاتنا</h2>
-        <p class="section-desc">نظرة فوتوغرافية سريعة على جودة وتنوع أعمالنا — اضغط على أي قطاع للاطلاع على كافة فيديوهاته في المعرض</p>
+        <p class="section-desc">اضغط على أي فيديو لتشغيله مباشرة وفوراً — أو اضغط على «المعرض» للانتقال ومشاهدة جميع أعمال القطاع</p>
       </div>
 
       <div class="photo-grid">
 
-        <!-- 1. Corporate / Companies -->
-        <a href="works.html?filter=corporate" class="photo-card">
-          <span class="photo-card-tag">الشركات والمؤسسات</span>
-          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1GUHCX_GFLMlqNkfBvuVifv88XW-eF5Bb&sz=w1200" alt="إنتاج الشركات والمؤسسات" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80'">
-          <div class="photo-card-overlay">
-            <div class="photo-card-text">
+        <!-- 1. Corporate / Companies (أرامكو) -->
+        <div class="video-card" onclick="openHomeVideo('1GUHCX_GFLMlqNkfBvuVifv88XW-eF5Bb', 'الشركات والمؤسسات الكبرى (أرامكو)', 'works.html?filter=corporate')">
+          <span class="video-card-tag">الشركات والمؤسسات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1GUHCX_GFLMlqNkfBvuVifv88XW-eF5Bb&sz=w1200" alt="إنتاج الشركات والمؤسسات" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
               <h3>الشركات والمؤسسات الكبرى</h3>
-              <p>أرامكو، سينوبك، مطار الدمام، العطيشان (5 أعمال)</p>
+              <p>أرامكو، سينوبك، مطار الدمام، العطيشان</p>
             </div>
-            <div class="photo-card-link-icon">&larr;</div>
+            <a href="works.html?filter=corporate" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
           </div>
-        </a>
+        </div>
 
-        <!-- 2. Health Sector -->
-        <a href="works.html?filter=health" class="photo-card">
-          <span class="photo-card-tag">وزارة الصحة</span>
-          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk&sz=w1200" alt="القطاع الصحي والطب" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80'">
-          <div class="photo-card-overlay">
-            <div class="photo-card-text">
+        <!-- 2. Health Sector (مستشفى سليمان الحبيب) -->
+        <div class="video-card" onclick="openHomeVideo('1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk', 'القطاع الصحي والمستشفيات (سليمان الحبيب)', 'works.html?filter=health')">
+          <span class="video-card-tag">وزارة الصحة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk&sz=w1200" alt="القطاع الصحي والطب" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
               <h3>القطاع الصحي والمستشفيات</h3>
-              <p>مستشفى سليمان الحبيب، التجمع الصحي (7 أعمال)</p>
+              <p>مستشفى سليمان الحبيب، التجمع الصحي</p>
             </div>
-            <div class="photo-card-link-icon">&larr;</div>
+            <a href="works.html?filter=health" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
           </div>
-        </a>
+        </div>
 
-        <!-- 3. Construction & Real Estate -->
-        <a href="works.html?filter=construction" class="photo-card">
-          <span class="photo-card-tag">شركات البناء والإسكان</span>
-          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-&sz=w1200" alt="شركات البناء والإسكان" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d0fbb18615f7?auto=format&fit=crop&w=1200&q=80'">
-          <div class="photo-card-overlay">
-            <div class="photo-card-text">
+        <!-- 3. Construction & Real Estate (مشاريع الإسكان) -->
+        <div class="video-card" onclick="openHomeVideo('1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-', 'البناء والإسكان والتطوير العقاري', 'works.html?filter=construction')">
+          <span class="video-card-tag">البناء والإسكان</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-&sz=w1200" alt="شركات البناء والإسكان" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d0fbb18615f7?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
               <h3>البناء والإسكان والتطوير</h3>
-              <p>شركة السديم، انوفيست، مخطط البدرية (6 أعمال)</p>
+              <p>شركة السديم، انوفيست، مخطط البدرية</p>
             </div>
-            <div class="photo-card-link-icon">&larr;</div>
+            <a href="works.html?filter=construction" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
           </div>
-        </a>
+        </div>
 
-        <!-- 4. Sports -->
-        <a href="works.html?filter=sports" class="photo-card">
-          <span class="photo-card-tag">وزارة الرياضة</span>
-          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1iai-FCFxCNCjDan6fuzfTriJs7WTNK4s&sz=w1200" alt="الأندية الرياضية" onerror="this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80'">
-          <div class="photo-card-overlay">
-            <div class="photo-card-text">
+        <!-- 4. Sports (نادي القادسية) -->
+        <div class="video-card" onclick="openHomeVideo('1iai-FCFxCNCjDan6fuzfTriJs7WTNK4s', 'وزارة الرياضة (نادي القادسية)', 'works.html?filter=sports')">
+          <span class="video-card-tag">وزارة الرياضة</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1iai-FCFxCNCjDan6fuzfTriJs7WTNK4s&sz=w1200" alt="الأندية الرياضية" onerror="this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
               <h3>الرياضة والأندية المحترفة</h3>
-              <p>نادي القادسية، نادي الترجي بالقطيف (عملان)</p>
+              <p>نادي القادسية، نادي الترجي بالقطيف</p>
             </div>
-            <div class="photo-card-link-icon">&larr;</div>
+            <a href="works.html?filter=sports" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
           </div>
-        </a>
+        </div>
 
-        <!-- 5. Hospitality / Cafes & Restaurants (تم تحديثها بالرابط الجديد المحدد) -->
-        <a href="works.html?filter=hospitality" class="photo-card">
-          <span class="photo-card-tag">المطاعم والكافيهات</span>
-          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N&sz=w1200" alt="المطاعم والكافيهات السينمائية" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80'">
-          <div class="photo-card-overlay">
-            <div class="photo-card-text">
+        <!-- 5. Hospitality / Cafes & Restaurants (المطاعم والكافيهات) -->
+        <div class="video-card" onclick="openHomeVideo('1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N', 'المطاعم والمقاهي الفاخرة', 'works.html?filter=hospitality')">
+          <span class="video-card-tag">المطاعم والكافيهات</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N&sz=w1200" alt="المطاعم والكافيهات السينمائية" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
               <h3>المطاعم والمقاهي الفاخرة</h3>
               <p>تغطيات سينمائية لأفخم المطاعم والضيافة</p>
             </div>
-            <div class="photo-card-link-icon">&larr;</div>
+            <a href="works.html?filter=hospitality" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
           </div>
-        </a>
+        </div>
 
-        <!-- 6. Weddings & Celebrations -->
-        <a href="works.html?filter=weddings" class="photo-card">
-          <span class="photo-card-tag">الزواجات والأفراح</span>
-          <img class="photo-card-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1VHNNUkeugR5NLY1bTNO4Owsk1LtR8wu7&sz=w1200" alt="الزواجات والأفراح" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80'">
-          <div class="photo-card-overlay">
-            <div class="photo-card-text">
-              <h3>توثيق الزواجات والأفراح</h3>
-              <p>بروموهات سينمائية وتوثيق راقٍ لليلة العمر (عملان)</p>
+        <!-- 6. Weddings & Celebrations (الزواجات والأفراح) -->
+        <div class="video-card" onclick="openHomeVideo('1VHNNUkeugR5NLY1bTNO4Owsk1LtR8wu7', 'توثيق الزواجات والأفراح', 'works.html?filter=weddings')">
+          <span class="video-card-tag">الزواجات والأفراح</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1VHNNUkeugR5NLY1bTNO4Owsk1LtR8wu7&sz=w1200" alt="الزواجات والأفراح" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
             </div>
-            <div class="photo-card-link-icon">&larr;</div>
           </div>
-        </a>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
+              <h3>توثيق الزواجات والأفراح</h3>
+              <p>بروموهات سينمائية وتوثيق راقٍ لليلة العمر</p>
+            </div>
+            <a href="works.html?filter=weddings" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
+          </div>
+        </div>
+
+        <!-- 7. China Documentary (فيلم الصين) -->
+        <div class="video-card" onclick="openHomeVideo('1fpgduxF-RgA7VXIGZBUl0oO5t08Z_-dv', 'فيلم الصين الوثائقي', 'works.html?filter=china')">
+          <span class="video-card-tag">فيلم الصين</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1fpgduxF-RgA7VXIGZBUl0oO5t08Z_-dv&sz=w1200" alt="فيلم الصين" onerror="this.src='https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
+              <h3>فيلم الصين الوثائقي</h3>
+              <p>إنتاج وثائقي وتصوير سينمائي دولي</p>
+            </div>
+            <a href="works.html?filter=china" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
+          </div>
+        </div>
+
+        <!-- 8. National Day (اليوم الوطني) -->
+        <div class="video-card" onclick="openHomeVideo('1PZF1T87poIpqkNkifBTFaC33V5AkNNOm', 'اليوم الوطني والمناسبات الكبرى', 'works.html?filter=national')">
+          <span class="video-card-tag">المناسبات الوطنية</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=1PZF1T87poIpqkNkifBTFaC33V5AkNNOm&sz=w1200" alt="اليوم الوطني" onerror="this.src='https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
+              <h3>اليوم الوطني والمناسبات الكبرى</h3>
+              <p>أعمال وطنية ملحمية ومناسبات رسمية</p>
+            </div>
+            <a href="works.html?filter=national" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
+          </div>
+        </div>
+
+        <!-- 9. TV Programs & Podcast (البرامج والبودكاست) -->
+        <div class="video-card" onclick="openHomeVideo('19xpFZj_t7aWRjMOVF8oAxgNiN1bg7wi_', 'برنامج صحتك مع وليد — برامج وبودكاست', 'works.html?filter=tv')">
+          <span class="video-card-tag">برامج وبودكاست</span>
+          <div class="thumb-wrap">
+            <img class="thumb-img" loading="lazy" src="https://drive.google.com/thumbnail?id=19xpFZj_t7aWRjMOVF8oAxgNiN1bg7wi_&sz=w1200" alt="البرامج التلفزيونية والبودكاست" onerror="this.src='https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=80'">
+            <div class="play-overlay">
+              <div class="play-btn-circle">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="play-text-hint">تشغيل فوري ▶</span>
+            </div>
+          </div>
+          <div class="video-card-overlay">
+            <div class="video-card-text">
+              <h3>البرامج التلفزيونية والبودكاست</h3>
+              <p>صحتك مع وليد، ملوك وعظماء، وتراث القطيف</p>
+            </div>
+            <a href="works.html?filter=tv" class="goto-gallery-btn" onclick="event.stopPropagation();" title="الانتقال لصفحة المعرض">
+              <span>المعرض</span> &larr;
+            </a>
+          </div>
+        </div>
 
       </div>
 
@@ -690,12 +946,97 @@
     </div>
   </footer>
 
+  <!-- Video Modal / Lightbox for Direct Homepage Playback -->
+  <div id="homeVideoModal" class="video-modal" aria-hidden="true" onclick="closeHomeVideo(event)">
+    <div class="modal-content-wrap" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeHomeVideo()" aria-label="إغلاق">&times;</button>
+      <div class="modal-aspect">
+        <iframe id="homeModalIframe" src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+      </div>
+      <div class="modal-footer-bar">
+        <div id="homeModalTitle" class="modal-video-title">مشاهدة العمل الإنتاجي</div>
+        <a id="homeModalGalleryLink" href="works.html" class="modal-gallery-btn">الانتقال لكافة أعمال هذا القطاع في المعرض &larr;</a>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script>
-    // Mobile Burger Toggle
+    // Mobile Burger Toggle & Auto-Close
     const burger = document.getElementById('burgerBtn');
     const navLinks = document.getElementById('navLinks');
-    burger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+    if (burger && navLinks) {
+      burger.addEventListener('click', () => {
+        const isOpen = burger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          burger.classList.remove('open');
+          navLinks.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+
+    // Direct Video Playback Modal
+    function openHomeVideo(videoId, title, galleryUrl) {
+      const modal = document.getElementById('homeVideoModal');
+      const iframe = document.getElementById('homeModalIframe');
+      const titleEl = document.getElementById('homeModalTitle');
+      const linkEl = document.getElementById('homeModalGalleryLink');
+
+      if (!modal || !iframe) return;
+
+      iframe.src = 'https://drive.google.com/file/d/' + videoId + '/preview';
+      if (titleEl) titleEl.textContent = title || 'مشاهدة العمل';
+      if (linkEl) linkEl.href = galleryUrl || 'works.html';
+
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      if (window.gsap) {
+        gsap.fromTo(modal.querySelector('.modal-content-wrap'),
+          { scale: 0.88, opacity: 0, y: 20 },
+          { scale: 1, opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' }
+        );
+      }
+    }
+
+    function closeHomeVideo(e) {
+      if (e && e.target && e.target.closest && e.target.closest('.modal-content-wrap') && !e.target.closest('.modal-close-btn')) {
+        return;
+      }
+      const modal = document.getElementById('homeVideoModal');
+      const iframe = document.getElementById('homeModalIframe');
+      if (!modal) return;
+
+      const finishClose = () => {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        if (iframe) iframe.src = '';
+        document.body.style.overflow = '';
+      };
+
+      if (window.gsap && modal.classList.contains('active')) {
+        gsap.to(modal.querySelector('.modal-content-wrap'), {
+          scale: 0.9,
+          opacity: 0,
+          duration: 0.22,
+          ease: 'power2.in',
+          onComplete: finishClose
+        });
+      } else {
+        finishClose();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeHomeVideo();
+    });
   </script>
 
   <!-- GSAP Suite & Interactions -->
