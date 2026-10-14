@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f5ef">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#090a0d">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8f6f0">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#060709">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>GOLDEN LENS STUDIO | إنتاج مرئي وصناعة محتوى سينمائي</title>
@@ -36,7 +36,7 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3.0">
 
   <!-- GSAP Core & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -51,506 +51,6 @@
     }
   }
   </script>
-  <style>
-    /* Hero Section */
-    .hero {
-      position: relative;
-      min-height: 75vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 20px 50px;
-      background: radial-gradient(circle at 50% 25%, rgba(197, 160, 89, 0.12) 0%, transparent 65%),
-                  linear-gradient(180deg, var(--bg-deep) 0%, #101217 60%, var(--bg-deep) 100%);
-    }
-
-    [data-theme="light"] .hero {
-      background: radial-gradient(circle at 50% 25%, rgba(163, 121, 44, 0.12) 0%, transparent 65%),
-                  linear-gradient(180deg, #f7f5ef 0%, #eee8db 60%, #f7f5ef 100%) !important;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: 
-        linear-gradient(rgba(197, 160, 89, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(197, 160, 89, 0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse at center, black 35%, transparent 75%);
-      pointer-events: none;
-    }
-
-    [data-theme="light"] .hero::before {
-      background-image: 
-        linear-gradient(rgba(163, 121, 44, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(163, 121, 44, 0.05) 1px, transparent 1px) !important;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 3.5px;
-      color: var(--gold-light);
-      background: rgba(197, 160, 89, 0.1);
-      border: 1px solid var(--border-gold-strong);
-      padding: 6px 20px;
-      border-radius: var(--radius-pill);
-      margin-bottom: 22px;
-      font-weight: 700;
-    }
-
-    [data-theme="light"] .hero-badge {
-      background: rgba(163, 121, 44, 0.1) !important;
-      border-color: rgba(163, 121, 44, 0.4) !important;
-      color: #7a5818 !important;
-    }
-
-    .hero-title {
-      font-size: clamp(2.2rem, 5.8vw, 4.8rem);
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      line-height: 1.22;
-      color: var(--text-cream);
-      margin-bottom: 18px;
-    }
-
-    .hero-title span {
-      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 70%, var(--gold-dark) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-desc {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: var(--text-muted);
-      max-width: 700px;
-      margin: 0 auto 34px;
-      line-height: 1.85;
-    }
-
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .hero-actions-primary {
-      display: inline-flex;
-      gap: 14px;
-      align-items: center;
-    }
-
-    /* Sections */
-    .section-pad {
-      padding: 55px 0;
-      border-top: 1px solid var(--border-gold);
-      position: relative;
-    }
-
-    /* Video Showcase Grid (تشغيل فوري في الصفحة الرئيسية) */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 22px;
-    }
-
-    .video-card {
-      position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      aspect-ratio: 16 / 10;
-      grid-column: span 4;
-      cursor: pointer;
-      transition: var(--transition);
-      display: block;
-      user-select: none;
-    }
-
-    .video-card:hover {
-      border-color: var(--gold-primary);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 160, 89, 0.25);
-    }
-
-    .video-card .thumb-wrap {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .video-card .thumb-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .video-card:hover .thumb-img {
-      transform: scale(1.06);
-    }
-
-    .video-card-tag {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: rgba(10, 11, 14, 0.88);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--border-gold);
-      color: var(--gold-light);
-      font-size: 0.74rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: var(--radius-pill);
-      z-index: 5;
-    }
-
-    .video-card .play-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      z-index: 3;
-      pointer-events: none;
-      background: rgba(0, 0, 0, 0.18);
-      transition: var(--transition);
-    }
-
-    .video-card:hover .play-overlay {
-      background: rgba(0, 0, 0, 0.35);
-    }
-
-    .play-btn-circle {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      background: rgba(10, 11, 14, 0.8);
-      backdrop-filter: blur(8px);
-      border: 2px solid var(--gold-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold-light);
-      box-shadow: 0 0 25px rgba(197, 160, 89, 0.4);
-      transition: var(--transition);
-    }
-
-    .video-card:hover .play-btn-circle {
-      transform: scale(1.14);
-      background: var(--gold-primary);
-      color: #000;
-      box-shadow: 0 0 35px rgba(197, 160, 89, 0.75);
-    }
-
-    .play-btn-circle svg {
-      width: 24px;
-      height: 24px;
-      fill: currentColor;
-      margin-right: -2px;
-    }
-
-    .play-text-hint {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: #ffffff;
-      background: rgba(0, 0, 0, 0.65);
-      padding: 3px 12px;
-      border-radius: var(--radius-pill);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .video-card-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 34px 16px 14px;
-      background: linear-gradient(to top, rgba(10, 11, 14, 0.96) 0%, rgba(10, 11, 14, 0.5) 60%, transparent 100%);
-      z-index: 4;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 10px;
-    }
-
-    .video-card-text {
-      flex-grow: 1;
-      text-align: right;
-    }
-
-    .video-card-text h3 {
-      font-size: 1.15rem;
-      color: #ffffff !important;
-      font-weight: 700;
-      margin-bottom: 2px;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-    }
-
-    .video-card-text p {
-      font-size: 0.82rem;
-      color: rgba(255, 255, 255, 0.88) !important;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
-    }
-
-    .goto-gallery-btn {
-      background: rgba(197, 160, 89, 0.2);
-      border: 1px solid var(--border-gold);
-      color: var(--gold-light);
-      padding: 5px 12px;
-      border-radius: var(--radius-pill);
-      font-size: 0.78rem;
-      font-weight: 700;
-      white-space: nowrap;
-      text-decoration: none;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-
-    .goto-gallery-btn:hover {
-      background: var(--gold-primary);
-      color: #0a0b0e;
-      border-color: var(--gold-primary);
-      transform: translateY(-2px);
-    }
-
-    .view-all-works-box {
-      text-align: center;
-      margin-top: 36px;
-    }
-
-    .btn-all-works {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(197, 160, 89, 0.08);
-      border: 1.5px solid var(--gold-primary);
-      color: var(--gold-light);
-      padding: 15px 36px;
-      border-radius: var(--radius-pill);
-      font-size: 1.05rem;
-      font-weight: 800;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-      transition: var(--transition);
-    }
-
-    .btn-all-works:hover {
-      background: var(--gold-primary);
-      color: #0a0b0e;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(197, 160, 89, 0.45);
-    }
-
-    /* About Section */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 45px;
-      align-items: center;
-    }
-
-    .about-highlights {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 26px;
-    }
-
-    .highlight-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      padding: 16px;
-      border-radius: var(--radius-sm);
-      font-weight: 700;
-      color: var(--text-cream);
-      text-align: center;
-      border-right: 3px solid var(--gold-primary);
-      font-size: 0.95rem;
-    }
-
-    .why-us-box {
-      background: radial-gradient(ellipse at center, rgba(197, 160, 89, 0.08) 0%, var(--bg-card) 75%);
-      border: 1px solid var(--border-gold);
-      border-radius: var(--radius-lg);
-      padding: 36px 28px;
-    }
-
-    .why-us-box h3 {
-      font-size: 1.45rem;
-      color: var(--gold-light);
-      margin-bottom: 14px;
-    }
-
-    /* Services Grid */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-bottom: 30px;
-    }
-
-    .service-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 26px 20px;
-      text-align: center;
-      transition: var(--transition);
-      display: block;
-      text-decoration: none;
-    }
-
-    .service-card:hover {
-      border-color: var(--gold-primary);
-      transform: translateY(-4px);
-    }
-
-    .service-card-icon {
-      width: 52px;
-      height: 52px;
-      margin: 0 auto 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(197, 160, 89, 0.1);
-      border-radius: 50%;
-      border: 1px solid var(--border-gold);
-      color: var(--gold-primary);
-    }
-
-    .service-card-icon svg {
-      width: 26px;
-      height: 26px;
-      stroke: currentColor;
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .service-card h3 {
-      font-size: 1.1rem;
-      color: var(--text-cream);
-      margin-bottom: 6px;
-    }
-
-    .service-card p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* Packages */
-    .packages-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      margin-top: 26px;
-    }
-
-    .pkg-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 34px 26px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: var(--transition);
-    }
-
-    .pkg-card:hover {
-      border-color: var(--gold-primary);
-      transform: translateY(-4px);
-    }
-
-    .pkg-card.popular {
-      border-color: var(--gold-primary);
-      background: radial-gradient(ellipse at 50% 0%, rgba(197, 160, 89, 0.12) 0%, var(--bg-card) 70%);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(197, 160, 89, 0.15);
-    }
-
-    .popular-tag {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-      color: #0a0b0e;
-      font-size: 0.74rem;
-      font-weight: 800;
-      padding: 3px 16px;
-      border-radius: var(--radius-pill);
-      white-space: nowrap;
-    }
-
-    .pkg-title {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--text-cream);
-      margin-bottom: 4px;
-    }
-
-    .pkg-target {
-      color: var(--gold-primary);
-      font-size: 0.85rem;
-      margin-bottom: 14px;
-    }
-
-    .pkg-desc {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-      min-height: 44px;
-    }
-
-    .pkg-features {
-      list-style: none;
-      margin-bottom: 26px;
-      flex-grow: 1;
-    }
-
-    .pkg-features li {
-      position: relative;
-      padding-right: 22px;
-      color: var(--text-cream);
-      font-size: 0.88rem;
-      margin-bottom: 10px;
-      line-height: 1.55;
-    }
-
-    .pkg-features li::before {
-      content: "✓";
-      position: absolute;
-      right: 0;
-      color: var(--gold-primary);
-      font-weight: 900;
-    }
-
-    @media (max-width: 1024px) {
-      .video-card { grid-column: span 6; }
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 900px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 26px auto 0; }
-    }
-
-    @media (max-width: 768px) {
-      .video-card { grid-column: span 12; aspect-ratio: 16 / 9.5; }
-      .services-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
-    }
-  </style>
 </head>
 <body>
 
@@ -571,11 +71,11 @@
         <li><a href="booking.html" class="nav-booking-link"><span>اطلب عرض سعر</span><span class="nav-arrow">&larr;</span></a></li>
         <li class="nav-drawer-cta">
           <a href="booking.html" class="btn btn-gold">احجز باقتك الآن</a>
-          <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">
+          <a href="https://wa.me/966595489685" class="btn btn-whatsapp" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
             تواصل مباشر واتساب
           </a>
-          <div class="nav-drawer-social">@goldenlens.sa · المملكة العربية السعودية</div>
+          <div class="nav-drawer-social">@goldenlens.sa · +966 59 548 9685</div>
         </li>
       </ul>
 
@@ -587,7 +87,7 @@
         </button>
 
         <a href="booking.html" class="btn btn-gold nav-btn-book">احجز مشروعك</a>
-        <a href="https://wa.me/966594589685" class="btn btn-whatsapp nav-btn-wa" target="_blank" rel="noopener" title="تواصل واتساب">
+        <a href="https://wa.me/966595489685" class="btn btn-whatsapp nav-btn-wa" target="_blank" rel="noopener" title="تواصل واتساب">
           <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
           <span class="wa-btn-text">واتساب</span>
         </a>
@@ -601,17 +101,17 @@
   </nav>
 
   <!-- Hero Section -->
-  <header class="hero" id="hero">
+  <header class="hero page-hero" id="hero">
     <div class="container" style="position:relative; z-index:2;">
-      <div class="hero-badge">STUDIO · CINEMATIC PRODUCTION</div>
-      <h1 class="hero-title">GOLDEN <span>LENS</span> STUDIO</h1>
-      <p class="hero-desc">
+      <div class="hero-badge page-eyebrow">STUDIO · CINEMATIC PRODUCTION</div>
+      <h1 class="hero-title page-title">GOLDEN <span>LENS</span> STUDIO</h1>
+      <p class="hero-desc page-subtitle">
         نصنع الصورة السينمائية بعين احترافية — من الفكرة والتصوير إلى المونتاج والتلوين السينمائي، نروي قصتك بجودة تليق بمشروعك.
       </p>
       <div class="hero-actions">
         <div class="hero-actions-primary">
           <a href="booking.html" class="btn btn-gold">احجز باقتك الآن</a>
-          <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">
+          <a href="https://wa.me/966595489685" class="btn btn-whatsapp" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
             واتساب مباشر
           </a>
@@ -949,14 +449,14 @@
       <h2 class="section-title">لنبدأ تصوير مشروعك</h2>
       <p class="section-desc" style="margin-bottom:30px;">تواصل معنا مباشرة للاستفسار، حجز موعد تصوير، أو طلب باقة مخصصة</p>
       <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-        <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">تواصل فوري عبر واتساب</a>
+        <a href="https://wa.me/966595489685" class="btn btn-whatsapp" target="_blank" rel="noopener">تواصل فوري عبر واتساب</a>
         <a href="booking.html" class="btn btn-gold">حجز الباقة عبر الموقع</a>
       </div>
     </div>
   </section>
 
   <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/966594589685" class="floating-wa" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+  <a href="https://wa.me/966595489685" class="floating-wa" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
     <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
   </a>
 
@@ -968,6 +468,7 @@
         <a href="index.html">الرئيسية</a>
         <a href="works.html">معرض الأعمال الكامل (36 عمل)</a>
         <a href="booking.html">حجز الباقات وعرض السعر</a>
+        <a href="https://wa.me/966595489685" target="_blank" rel="noopener" dir="ltr">+966 59 548 9685</a>
         <a href="https://instagram.com/goldenlens.sa" target="_blank" rel="noopener">إنستغرام: @goldenlens.sa</a>
       </div>
       <p>جميع الحقوق محفوظة &copy; 2026 GOLDEN LENS STUDIO</p>

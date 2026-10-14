@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f5ef">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#090a0d">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8f6f0">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#060709">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>معرض الأعمال السينمائية | GOLDEN LENS STUDIO</title>
@@ -16,7 +16,7 @@
   <meta property="og:description" content="تصفح أكثر من 35 مشروعاً سينمائياً وتوثيقياً احترافياً نفذها استوديو جولدن لينس.">
   <meta property="og:image" content="https://lh3.googleusercontent.com/d/1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N">
 
-  <!-- Instant Theme Loader (Zero flicker) -->
+  <!-- Instant Theme Loader -->
   <script>
     (function(){
       var t = localStorage.getItem('goldenlens_theme');
@@ -24,192 +24,11 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3.0">
 
   <!-- GSAP Core & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <!-- Importmap to enable `import { gsap } from "gsap";` in all browser ES modules -->
-  <script type="importmap">
-  {
-    "imports": {
-      "gsap": "https://esm.sh/gsap@3.12.5",
-      "gsap/ScrollTrigger": "https://esm.sh/gsap@3.12.5/ScrollTrigger"
-    }
-  }
-  </script>
-  <style>
-    .works-hero {
-      padding: 125px 0 30px;
-      text-align: center;
-      position: relative;
-    }
-    
-    .filter-bar {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 28px auto 20px;
-      max-width: 1150px;
-    }
-
-    .filter-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border-gold);
-      color: var(--text-muted);
-      padding: 9px 20px;
-      border-radius: var(--radius-pill);
-      font-size: 0.88rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .filter-btn:hover {
-      border-color: var(--gold-light);
-      color: var(--gold-light);
-      transform: translateY(-2px);
-    }
-
-    .filter-btn.active {
-      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-      color: #0a0b0e;
-      border-color: var(--gold-primary);
-      box-shadow: 0 4px 18px rgba(197, 160, 89, 0.35);
-    }
-
-    [data-theme="light"] .filter-btn.active {
-      color: #ffffff;
-    }
-
-    .filter-btn .count-badge {
-      font-size: 0.75rem;
-      background: rgba(0, 0, 0, 0.25);
-      padding: 2px 7px;
-      border-radius: 10px;
-    }
-
-    .filter-btn.active .count-badge {
-      background: rgba(0, 0, 0, 0.35);
-      color: #fff;
-    }
-
-    .works-status-bar {
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.88rem;
-      margin-bottom: 30px;
-    }
-
-    .works-section {
-      padding-bottom: 90px;
-    }
-
-    .works-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 24px;
-    }
-
-    .work-card {
-      position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      cursor: pointer;
-      transition: var(--transition);
-      aspect-ratio: 16 / 9;
-      grid-column: span 4;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .work-card:hover {
-      border-color: var(--gold-primary);
-      transform: translateY(-6px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 160, 89, 0.2);
-    }
-
-    .work-info-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 34px 18px 16px;
-      background: linear-gradient(to top, rgba(10, 11, 14, 0.96) 0%, rgba(10, 11, 14, 0.5) 60%, transparent 100%);
-      z-index: 4;
-      pointer-events: none;
-    }
-
-    .work-info h3 {
-      font-size: 1.08rem;
-      color: #ffffff;
-      font-weight: 700;
-      margin-bottom: 4px;
-      line-height: 1.35;
-    }
-
-    .work-info p {
-      color: var(--gold-light);
-      font-size: 0.82rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .work-cat-badge {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: rgba(18, 20, 26, 0.88);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--border-gold);
-      color: var(--gold-light);
-      font-size: 0.74rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: var(--radius-pill);
-      z-index: 5;
-    }
-
-    .cta-banner {
-      background: radial-gradient(ellipse at 50% 50%, rgba(197, 160, 89, 0.12) 0%, var(--bg-card) 70%);
-      border: 1px solid var(--border-gold);
-      border-radius: var(--radius-lg);
-      padding: 50px 24px;
-      text-align: center;
-      margin-top: 60px;
-    }
-
-    .cta-banner h2 {
-      font-size: 2.1rem;
-      color: var(--text-cream);
-      margin-bottom: 12px;
-    }
-
-    .cta-banner p {
-      color: var(--text-muted);
-      max-width: 620px;
-      margin: 0 auto 26px;
-      font-size: 1.05rem;
-    }
-
-    @media (max-width: 1024px) {
-      .work-card { grid-column: span 6; }
-    }
-    @media (max-width: 768px) {
-      .works-hero { padding: 85px 16px 20px !important; }
-      .work-card { grid-column: span 12; }
-      .filter-bar { gap: 6px; }
-      .filter-btn { padding: 7px 14px; font-size: 0.82rem; }
-    }
-  </style>
 </head>
 <body>
 
@@ -230,23 +49,22 @@
         <li><a href="booking.html" class="nav-booking-link"><span>اطلب عرض سعر</span><span class="nav-arrow">&larr;</span></a></li>
         <li class="nav-drawer-cta">
           <a href="booking.html" class="btn btn-gold">احجز باقتك الآن</a>
-          <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">
+          <a href="https://wa.me/966595489685" class="btn btn-whatsapp" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
             تواصل مباشر واتساب
           </a>
-          <div class="nav-drawer-social">@goldenlens.sa · المملكة العربية السعودية</div>
+          <div class="nav-drawer-social">@goldenlens.sa · +966 59 548 9685</div>
         </li>
       </ul>
 
       <div class="nav-actions">
-        <!-- Theme Toggle Button -->
         <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="تبديل الوضع الليلي / النهاري" title="تبديل الوضع">
           <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
 
         <a href="booking.html" class="btn btn-gold nav-btn-book">احجز مشروعك</a>
-        <a href="https://wa.me/966594589685" class="btn btn-whatsapp nav-btn-wa" target="_blank" rel="noopener" title="تواصل واتساب">
+        <a href="https://wa.me/966595489685" class="btn btn-whatsapp nav-btn-wa" target="_blank" rel="noopener" title="تواصل واتساب">
           <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
           <span class="wa-btn-text">واتساب</span>
         </a>
@@ -260,15 +78,15 @@
   </nav>
 
   <!-- Hero Header -->
-  <header class="works-hero">
+  <header class="works-hero page-hero">
     <div class="container">
-      <span class="section-tag">Cinematic Archive</span>
-      <h1 class="section-title">معرض أعمال جولدن لينس</h1>
-      <p class="section-desc">
+      <span class="section-tag page-eyebrow">Cinematic Archive</span>
+      <h1 class="section-title page-title">معرض أعمال جولدن لينس</h1>
+      <p class="section-desc page-subtitle">
         تصفح إنتاجاتنا السينمائية الـ 36 المصنفة حسب القطاعات، واشهد بنفسك على مستوى الإخراج، التلوين، ودقة التفاصيل
       </p>
 
-      <!-- Category Filter Tabs (Including Standalone China Tab) -->
+      <!-- Category Filter Tabs -->
       <div class="filter-bar" id="filterBar">
         <button class="filter-btn active" data-filter="all">
           <span>الكل</span>
@@ -283,8 +101,8 @@
           <span class="count-badge">6</span>
         </button>
         <button class="filter-btn" data-filter="sports">
-          <span>وزارة الرياضة</span>
-          <span class="count-badge">2</span>
+          <span>الرياضة والملاكمة</span>
+          <span class="count-badge">3</span>
         </button>
         <button class="filter-btn" data-filter="health">
           <span>وزارة الصحة</span>
@@ -308,7 +126,7 @@
         </button>
         <button class="filter-btn" data-filter="hospitality">
           <span>المطاعم والكافيهات</span>
-          <span class="count-badge">3</span>
+          <span class="count-badge">2</span>
         </button>
         <button class="filter-btn" data-filter="ramadan">
           <span>رمضان والمواسم</span>
@@ -339,9 +157,7 @@
     <div class="container">
       <div class="works-grid" id="worksGrid">
 
-        <!-- ==============================================
-             0. الصين (مستقلة بذاتها كما طلبت بدقة)
-             ============================================== -->
+        <!-- 0. الصين -->
         <div class="work-card" data-category="china" data-video-id="1fpgduxF-RgA7VXIGZBUl0oO5t08Z_-dv">
           <span class="work-cat-badge">الصين</span>
           <div class="thumb-wrap">
@@ -360,10 +176,7 @@
           </div>
         </div>
 
-        <!-- ==============================================
-             1. شركات البناء والإسكان (6 أعمال)
-             ============================================== -->
-        <!-- 1.1 شركات البناء والاسكان -->
+        <!-- 1. شركات البناء والإسكان (6 أعمال) -->
         <div class="work-card" data-category="construction" data-video-id="1JOVr87-8LZ4UK_8UU_6VZdJPs8nYpU8-">
           <span class="work-cat-badge">شركات البناء والإسكان</span>
           <div class="thumb-wrap">
@@ -382,7 +195,6 @@
           </div>
         </div>
 
-        <!-- 1.2 شركة السديم -->
         <div class="work-card" data-category="construction" data-video-id="1zv4Y2WAetwBEcrBKdPr0ib7ycdRx6tPM">
           <span class="work-cat-badge">شركات البناء والإسكان</span>
           <div class="thumb-wrap">
@@ -401,7 +213,6 @@
           </div>
         </div>
 
-        <!-- 1.3 انوفيست (1) -->
         <div class="work-card" data-category="construction" data-video-id="1O0-8fc5NsDH79nJlUKFDRl2Fu1h6qWrQ">
           <span class="work-cat-badge">شركات البناء والإسكان</span>
           <div class="thumb-wrap">
@@ -420,7 +231,6 @@
           </div>
         </div>
 
-        <!-- 1.4 مادة السلايد -->
         <div class="work-card" data-category="construction" data-video-id="1QUGqdD5tv5mDx6FkaSZqMp1HDVpfmQmT">
           <span class="work-cat-badge">شركات البناء والإسكان</span>
           <div class="thumb-wrap">
@@ -439,7 +249,6 @@
           </div>
         </div>
 
-        <!-- 1.5 مخطط البدرية -->
         <div class="work-card" data-category="construction" data-video-id="1v-qhl9F37rob09XHS5oLXcBhEs1UCHEA">
           <span class="work-cat-badge">شركات البناء والإسكان</span>
           <div class="thumb-wrap">
@@ -458,7 +267,6 @@
           </div>
         </div>
 
-        <!-- 1.6 انوفيست (2) -->
         <div class="work-card" data-category="construction" data-video-id="1YtlyHO_5MwIr9Sqb3drGG9t3ANuFGvHi">
           <span class="work-cat-badge">شركات البناء والإسكان</span>
           <div class="thumb-wrap">
@@ -477,11 +285,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             2. وزارة الرياضة (عملان)
-             ============================================== -->
-        <!-- 2.1 نادي الترجي بالقطيف -->
+        <!-- 2. الرياضة والملاكمة (3 أعمال) -->
         <div class="work-card" data-category="sports" data-video-id="11LAomlpcwyhLRgaUCwyaRiocfiDDHUOu">
           <span class="work-cat-badge">وزارة الرياضة</span>
           <div class="thumb-wrap">
@@ -500,7 +304,6 @@
           </div>
         </div>
 
-        <!-- 2.2 نادي القادسية -->
         <div class="work-card" data-category="sports" data-video-id="1iai-FCFxCNCjDan6fuzfTriJs7WTNK4s">
           <span class="work-cat-badge">وزارة الرياضة</span>
           <div class="thumb-wrap">
@@ -519,7 +322,6 @@
           </div>
         </div>
 
-        <!-- 2.3 نادي الملاكمة واللياقة البدنية (بوكسينج) -->
         <div class="work-card" data-category="sports" data-video-id="1nEJVTUqe2hb3K5xjO7YfyG94Dw4DOn5N">
           <span class="work-cat-badge">الرياضة والملاكمة</span>
           <div class="thumb-wrap">
@@ -538,11 +340,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             3. وزارة الصحة (7 أعمال)
-             ============================================== -->
-        <!-- 3.1 مستشفى سليمان الحبيب -->
+        <!-- 3. وزارة الصحة (7 أعمال) -->
         <div class="work-card" data-category="health" data-video-id="1TUdKZIqaK91hvCGpxG5laAvj8Nq1aiUk">
           <span class="work-cat-badge">وزارة الصحة</span>
           <div class="thumb-wrap">
@@ -561,7 +359,6 @@
           </div>
         </div>
 
-        <!-- 3.2 يوم التمريض العالمي (1) -->
         <div class="work-card" data-category="health" data-video-id="1GsRyVJ3PGJeTg2Otiwyhw5ZMJduKf9UG">
           <span class="work-cat-badge">وزارة الصحة</span>
           <div class="thumb-wrap">
@@ -580,7 +377,6 @@
           </div>
         </div>
 
-        <!-- 3.3 يوم التمريض العالمي (2) -->
         <div class="work-card" data-category="health" data-video-id="1hVAe7R3JT1T17nE7IQYodW7AUCW5Q5Gp">
           <span class="work-cat-badge">وزارة الصحة</span>
           <div class="thumb-wrap">
@@ -599,7 +395,6 @@
           </div>
         </div>
 
-        <!-- 3.4 الجودة مجمع الدمام الطبي -->
         <div class="work-card" data-category="health" data-video-id="1nItIq5RkNcu5URWzK60GY2T0lwB4YmS5">
           <span class="work-cat-badge">وزارة الصحة</span>
           <div class="thumb-wrap">
@@ -618,7 +413,6 @@
           </div>
         </div>
 
-        <!-- 3.5 الشبو (حملة توعوية) -->
         <div class="work-card" data-category="health" data-video-id="18nDiPF_ChaXi8qRYnGhn6QjD-7mrRYM9">
           <span class="work-cat-badge">وزارة الصحة</span>
           <div class="thumb-wrap">
@@ -637,7 +431,6 @@
           </div>
         </div>
 
-        <!-- 3.6 الصحة السكانية -->
         <div class="work-card" data-category="health" data-video-id="10N8wX2Ll7oigEj4Ohr4ygP6UrQG9sIQ8">
           <span class="work-cat-badge">وزارة الصحة</span>
           <div class="thumb-wrap">
@@ -656,7 +449,6 @@
           </div>
         </div>
 
-        <!-- 3.7 زيارة الوزير -->
         <div class="work-card" data-category="health" data-video-id="1N_uUypqERSyya0vl5zzXbKsKd9oJ2-yR">
           <span class="work-cat-badge">وزارة الصحة</span>
           <div class="thumb-wrap">
@@ -675,11 +467,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             4. وزارة التعليم (عمل واحد)
-             ============================================== -->
-        <!-- 4.1 فلم قصير التعليم -->
+        <!-- 4. وزارة التعليم -->
         <div class="work-card" data-category="education" data-video-id="1QbhPZKanSoDJP40HT-mZuYJV-LBEHZYt">
           <span class="work-cat-badge">وزارة التعليم</span>
           <div class="thumb-wrap">
@@ -698,11 +486,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             5. الشركات والمؤسسات (5 أعمال)
-             ============================================== -->
-        <!-- 5.1 سينوبك (SINOPEC) -->
+        <!-- 5. الشركات والمؤسسات (5 أعمال) -->
         <div class="work-card" data-category="corporate" data-video-id="1VjUuvHxnAnV6AwECvSbrfp9FGCWCEJI3">
           <span class="work-cat-badge">الشركات</span>
           <div class="thumb-wrap">
@@ -721,7 +505,6 @@
           </div>
         </div>
 
-        <!-- 5.2 أرامكو السعودية -->
         <div class="work-card" data-category="corporate" data-video-id="1GUHCX_GFLMlqNkfBvuVifv88XW-eF5Bb">
           <span class="work-cat-badge">الشركات</span>
           <div class="thumb-wrap">
@@ -740,7 +523,6 @@
           </div>
         </div>
 
-        <!-- 5.3 شركة العطيشان -->
         <div class="work-card" data-category="corporate" data-video-id="1L_zEsX0LFNYO_OR7HxctqxspbCybDZDC">
           <span class="work-cat-badge">الشركات</span>
           <div class="thumb-wrap">
@@ -759,7 +541,6 @@
           </div>
         </div>
 
-        <!-- 5.4 النيازك -->
         <div class="work-card" data-category="corporate" data-video-id="1RcYe3El87MuoY7pbAIrh47jd3-TfNwmD">
           <span class="work-cat-badge">الشركات</span>
           <div class="thumb-wrap">
@@ -778,7 +559,6 @@
           </div>
         </div>
 
-        <!-- 5.5 فرضية مطار الملك فهد بالدمام -->
         <div class="work-card" data-category="corporate" data-video-id="1k_-2IcDgMjUD5goYtFMnohP2j7RNlmOB">
           <span class="work-cat-badge">الشركات والمطارات</span>
           <div class="thumb-wrap">
@@ -797,11 +577,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             6. اليوم الوطني والمناسبات الثقافية (4 أعمال)
-             ============================================== -->
-        <!-- 6.1 اليوم الوطني (1) -->
+        <!-- 6. اليوم الوطني والمناسبات (4 أعمال) -->
         <div class="work-card" data-category="national" data-video-id="1PZF1T87poIpqkNkifBTFaC33V5AkNNOm">
           <span class="work-cat-badge">اليوم الوطني</span>
           <div class="thumb-wrap">
@@ -820,7 +596,6 @@
           </div>
         </div>
 
-        <!-- 6.2 اليوم الوطني (2) -->
         <div class="work-card" data-category="national" data-video-id="10VrcgfOotL_291UxM02Ybw0j4jFf51Vt">
           <span class="work-cat-badge">اليوم الوطني</span>
           <div class="thumb-wrap">
@@ -839,7 +614,6 @@
           </div>
         </div>
 
-        <!-- 6.3 اليوم الوطني (3) -->
         <div class="work-card" data-category="national" data-video-id="1a7C-lbLVklAG8QhuA3yTJPEfUNJDrDO9">
           <span class="work-cat-badge">اليوم الوطني</span>
           <div class="thumb-wrap">
@@ -858,7 +632,6 @@
           </div>
         </div>
 
-        <!-- 6.4 رواية أنياب ناعمة -->
         <div class="work-card" data-category="national" data-video-id="1jSCClwyEHlsMlhyDUwrNgDec9qg6td2-">
           <span class="work-cat-badge">الأدب والثقافة</span>
           <div class="thumb-wrap">
@@ -877,11 +650,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             7. الجامعات (عمل واحد)
-             ============================================== -->
-        <!-- 7.1 جامعة الإمام عبدالرحمن -->
+        <!-- 7. الجامعات -->
         <div class="work-card" data-category="universities" data-video-id="1TPAcWCyiM24dT3lF11vdVBtWJr3ZPciR">
           <span class="work-cat-badge">الجامعات</span>
           <div class="thumb-wrap">
@@ -900,11 +669,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             8. المطاعم والكافيهات (عملان)
-             ============================================== -->
-        <!-- 8.1 مطعم خان الريحان -->
+        <!-- 8. المطاعم والكافيهات (عملان) -->
         <div class="work-card" data-category="hospitality" data-video-id="1BGPcCaOBY2PX329H06uEYOuJMAskYiWU">
           <span class="work-cat-badge">المطاعم والكافيهات</span>
           <div class="thumb-wrap">
@@ -923,7 +688,6 @@
           </div>
         </div>
 
-        <!-- 8.3 كوفي مانتروز -->
         <div class="work-card" data-category="hospitality" data-video-id="1cPQDYxnJ8Or8ll8q1tjCVS2OAmwWDQpd">
           <span class="work-cat-badge">المطاعم والكافيهات</span>
           <div class="thumb-wrap">
@@ -942,11 +706,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             9. رمضان والمواسم (عمل واحد)
-             ============================================== -->
-        <!-- 9.1 التجمع الصحي الأول - رمضان -->
+        <!-- 9. رمضان والمواسم -->
         <div class="work-card" data-category="ramadan" data-video-id="1a8XwPz_WIt9tyTy7uUAXw_6JlmAW0fMi">
           <span class="work-cat-badge">رمضان والمواسم</span>
           <div class="thumb-wrap">
@@ -965,11 +725,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             10. الزواجات والأفراح (عملان)
-             ============================================== -->
-        <!-- 10.1 الزواجات -->
+        <!-- 10. الزواجات والأفراح (عملان) -->
         <div class="work-card" data-category="weddings" data-video-id="1VHNNUkeugR5NLY1bTNO4Owsk1LtR8wu7">
           <span class="work-cat-badge">الزواجات والأفراح</span>
           <div class="thumb-wrap">
@@ -988,7 +744,6 @@
           </div>
         </div>
 
-        <!-- 10.2 الأفراح -->
         <div class="work-card" data-category="weddings" data-video-id="1BYBrWgH8iLAIZbI3AUWKkZb7az3TG7RG">
           <span class="work-cat-badge">الزواجات والأفراح</span>
           <div class="thumb-wrap">
@@ -1007,11 +762,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             11. البرامج التلفزيونية والوثائقية (3 أعمال)
-             ============================================== -->
-        <!-- 11.1 صحتك مع وليد -->
+        <!-- 11. البرامج التلفزيونية والوثائقية (3 أعمال) -->
         <div class="work-card" data-category="tv" data-video-id="19xpFZj_t7aWRjMOVF8oAxgNiN1bg7wi_">
           <span class="work-cat-badge">البرامج التلفزيونية</span>
           <div class="thumb-wrap">
@@ -1030,7 +781,6 @@
           </div>
         </div>
 
-        <!-- 11.2 ملوك وعظماء -->
         <div class="work-card" data-category="tv" data-video-id="12Sjo2SDd_sMnYDIIINudANR-7FSKakq9">
           <span class="work-cat-badge">الأفلام والوثائقي</span>
           <div class="thumb-wrap">
@@ -1049,7 +799,6 @@
           </div>
         </div>
 
-        <!-- 11.3 تراث القطيف -->
         <div class="work-card" data-category="tv" data-video-id="1DutX5MhjhE2l-uMCOKdqJN9dwxuPpqDL">
           <span class="work-cat-badge">البرامج التلفزيونية</span>
           <div class="thumb-wrap">
@@ -1068,11 +817,7 @@
           </div>
         </div>
 
-
-        <!-- ==============================================
-             12. موشن جرافيك (عمل واحد)
-             ============================================== -->
-        <!-- 12.1 موشن جرافيك فتنة -->
+        <!-- 12. موشن جرافيك -->
         <div class="work-card" data-category="motion" data-video-id="11Faf3gfo9PzTgQPUY_ZPbDcgyamWxnEr">
           <span class="work-cat-badge">موشن جرافيك</span>
           <div class="thumb-wrap">
@@ -1100,7 +845,7 @@
         <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
           <a href="booking.html" class="btn btn-gold">احجز باقتك الآن</a>
           <a href="https://drive.google.com/drive/folders/1JwSXjmtkpBH6EDHrK4jOenSlqXWTTfOd?usp=sharing" class="btn btn-outline-gold" target="_blank" rel="noopener">مجلد الأرشيف الكامل في Google Drive</a>
-          <a href="https://wa.me/966594589685" class="btn btn-whatsapp" target="_blank" rel="noopener">تحدث مع المخرج عبر واتساب</a>
+          <a href="https://wa.me/966595489685" class="btn btn-whatsapp" target="_blank" rel="noopener">تحدث مع المخرج عبر واتساب</a>
         </div>
       </div>
     </div>
@@ -1117,7 +862,7 @@
   </div>
 
   <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/966594589685" class="floating-wa" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+  <a href="https://wa.me/966595489685" class="floating-wa" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
     <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
   </a>
 
@@ -1129,6 +874,7 @@
         <a href="index.html">الرئيسية</a>
         <a href="works.html">معرض الأعمال</a>
         <a href="booking.html">حجز موعد</a>
+        <a href="https://wa.me/966595489685" target="_blank" rel="noopener" dir="ltr">+966 59 548 9685</a>
         <a href="https://instagram.com/goldenlens.sa" target="_blank" rel="noopener">إنستغرام</a>
       </div>
       <p>جميع الحقوق محفوظة &copy; 2026 GOLDEN LENS STUDIO</p>
@@ -1136,7 +882,6 @@
   </footer>
 
   <script>
-    // Filtering Logic
     const filterBtns = document.querySelectorAll('.filter-btn');
     const workCards = document.querySelectorAll('.work-card');
     const statusBar = document.getElementById('worksStatusBar');
@@ -1175,7 +920,6 @@
       });
     });
 
-    // Check URL query parameters (e.g., works.html?filter=china or ?filter=corporate)
     window.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const initialFilter = urlParams.get('filter') || urlParams.get('cat');
@@ -1187,7 +931,6 @@
       }
     });
 
-    // Modal video logic
     const modal = document.getElementById('videoModal');
     const iframe = document.getElementById('modalIframe');
     const closeBtn = document.getElementById('modalCloseBtn');
@@ -1233,7 +976,6 @@
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-    // Mobile burger toggle & Auto-Close
     const burger = document.getElementById('burgerBtn');
     const navLinks = document.getElementById('navLinks');
     if (burger && navLinks) {
@@ -1253,7 +995,6 @@
     }
   </script>
 
-  <!-- GSAP Suite & Interactions -->
   <script src="animations.js"></script>
 </body>
 </html>
