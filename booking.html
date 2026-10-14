@@ -24,13 +24,13 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="style.css?v=3.0">
+  <link rel="stylesheet" href="style.css?v=3.1">
 
   <!-- GSAP Core & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
-<body>
+<body class="booking-body">
 
   <div class="ambient-glow"></div>
 
@@ -184,7 +184,7 @@
           </div>
 
           <!-- 3. Dynamic Packages Container -->
-          <div class="form-group-title">
+          <div class="form-group-title" id="packagesSectionTitle">
             <span class="dot"></span>
             3. حدد الباقة المعتمدة
           </div>
@@ -193,15 +193,15 @@
 
           <!-- Notes -->
           <div class="input-box" style="margin-bottom: 24px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
-              <label for="clientNotes" style="margin-bottom:0;">ملاحظات أو طلبات خاصة (تاريخ الحفل، ساعات التصوير، درون...)</label>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px; flex-wrap:wrap; gap:6px;">
+              <label for="clientNotes" style="margin-bottom:0;">ملاحظات أو طلبات خاصة (تاريخ الحفل، ساعات التصوير...)</label>
               <span id="charCount" style="font-size:0.8rem; color:var(--text-muted); font-family:'Plus Jakarta Sans', sans-serif;">0 / 1000 حرف</span>
             </div>
             <textarea id="clientNotes" class="custom-input" maxlength="1000" style="height: 95px; resize: vertical;" placeholder="أخبرنا بأي تفاصيل إضافية عن مشروعك..."></textarea>
           </div>
 
           <!-- Live Summary Bar -->
-          <div class="order-summary-box">
+          <div class="order-summary-box" id="orderSummaryBox">
             <div class="summary-header">
               <div class="summary-title">ملخص الطلب المبدئي</div>
               <div class="packages-category-badge" id="summaryServiceBadge">الأعراس والمناسبات</div>
@@ -247,7 +247,7 @@
     </div>
   </main>
 
-  <!-- Floating WhatsApp Button -->
+  <!-- Floating WhatsApp Button (Hidden on mobile inside booking page via CSS to prevent blocking submit buttons) -->
   <a href="https://wa.me/966595489685" class="floating-wa" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
     <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
   </a>
@@ -450,8 +450,8 @@
         let html = `
           <div class="packages-title-row">
             <div>
-              <h3 style="color:var(--text-cream); font-size:1.3rem; margin-bottom:4px;">باقات تصوير وتوثيق الأعراس</h3>
-              <p style="color:var(--text-muted); font-size:0.9rem;">اختر الباقة الأساسية، مع إمكانية إضافة خدمة الليوة أو البث المباشر بالأسفل</p>
+              <h3 style="color:var(--text-cream); font-size:1.25rem; margin-bottom:4px;">باقات تصوير وتوثيق الأعراس</h3>
+              <p style="color:var(--text-muted); font-size:0.88rem;">اختر الباقة الأساسية، مع إمكانية إضافة خدمة الليوة أو البث المباشر بالأسفل</p>
             </div>
             <span class="packages-category-badge">6 باقات احترافية متدرجة</span>
           </div>
@@ -513,15 +513,16 @@
                   <p>توثيق وتصوير سينمائي خاص لفقرات فرقة الليوة والعرضات الشعبية والفلكلور المصاحب لمراسم الزواج</p>
                 </div>
               </div>
-              <div style="text-align:left; white-space:nowrap;">
+              <div class="addon-price-box">
+                <span style="font-size:0.8rem; color:var(--text-muted);">رسوم الإضافة:</span>
                 ${isFreeLiywa ? `
-                  <div style="display:flex; flex-direction:column; align-items:flex-end;">
+                  <div style="display:flex; align-items:center; gap:8px;">
                     <span class="liywa-strike-price">350 ريال</span>
                     <span class="liywa-free-text">مجاناً 🎁</span>
                   </div>
                 ` : `
-                  <span style="font-weight:800; color:var(--gold-light); font-size:1.25rem; font-family:'Plus Jakarta Sans',sans-serif;">
-                    +350 <small style="font-size:0.85rem; color:var(--text-muted);">ريال</small>
+                  <span style="font-weight:800; color:var(--gold-light); font-size:1.15rem; font-family:'Plus Jakarta Sans',sans-serif;">
+                    +350 <small style="font-size:0.82rem; color:var(--text-muted);">ريال</small>
                   </span>
                 `}
               </div>
@@ -538,9 +539,10 @@
                   <p>بث مباشر عالي الجودة للضيوف برابط خاص على قناة اليوتيوب مع أجهزة نقل لاسلكية احترافية</p>
                 </div>
               </div>
-              <div style="text-align:left; white-space:nowrap;">
-                <span style="font-weight:800; color:var(--gold-light); font-size:1.25rem; font-family:'Plus Jakarta Sans',sans-serif;">
-                  +1,000 <small style="font-size:0.85rem; color:var(--text-muted);">ريال</small>
+              <div class="addon-price-box">
+                <span style="font-size:0.8rem; color:var(--text-muted);">رسوم الإضافة:</span>
+                <span style="font-weight:800; color:var(--gold-light); font-size:1.15rem; font-family:'Plus Jakarta Sans',sans-serif;">
+                  +1,000 <small style="font-size:0.82rem; color:var(--text-muted);">ريال</small>
                 </span>
               </div>
             </div>
@@ -553,12 +555,12 @@
         let html = `
           <div class="packages-title-row">
             <div>
-              <h3 style="color:var(--text-cream); font-size:1.3rem; margin-bottom:4px;">باقات المطاعم والمقاهي (عروض حصرية)</h3>
-              <p style="color:var(--text-muted); font-size:0.9rem;">أسعار خاصة ومحتوى مخصص لرفع مبيعاتك وتعزيز حضورك الرقمي</p>
+              <h3 style="color:var(--text-cream); font-size:1.25rem; margin-bottom:4px;">باقات المطاعم والمقاهي (عروض حصرية)</h3>
+              <p style="color:var(--text-muted); font-size:0.88rem;">أسعار خاصة ومحتوى مخصص لرفع مبيعاتك وتعزيز حضورك الرقمي</p>
             </div>
             <span class="packages-category-badge">عروض محدودة</span>
           </div>
-          <div class="pkg-cards-grid" style="grid-template-columns: repeat(2, 1fr);">
+          <div class="pkg-cards-grid">
         `;
 
         restaurantPackages.forEach(pkg => {
@@ -596,13 +598,13 @@
             <p>
               نظراً لاختلاف طبيعة ومقاييس مشاريع ${sName} (حسب موقع التصوير، عدد الكاميرات، عدد أيام العمل، والمونتاج)، يتم تحديد السعر بأفضل عرض منافس بناءً على متطلباتك الدقيقة.
             </p>
-            <div style="background:rgba(203, 163, 88, 0.08); border:1px solid var(--border-gold); padding:16px; border-radius:var(--radius-sm); max-width:550px; margin:0 auto 20px;">
-              <span style="color:var(--gold-light); font-weight:700;">✓ سيتم تزويدك بعرض سعر تفصيلي خلال دقائق عبر واتساب</span>
+            <div style="background:rgba(203, 163, 88, 0.08); border:1px solid var(--border-gold); padding:14px; border-radius:var(--radius-sm); max-width:550px; margin:0 auto 20px;">
+              <span style="color:var(--gold-light); font-weight:700; font-size:0.9rem;">✓ سيتم تزويدك بعرض سعر تفصيلي خلال دقائق عبر واتساب</span>
             </div>
-            <div style="margin-top:20px;">
-              <button type="button" class="btn btn-whatsapp" onclick="inquireCustomWA('${sName}')" style="display:inline-flex; align-items:center; gap:10px; padding:15px 32px; font-size:1.05rem; font-weight:800; border-radius:var(--radius-pill); box-shadow: 0 8px 24px rgba(37, 211, 102, 0.25); cursor:pointer;">
-                <svg viewBox="0 0 24 24" style="width:22px; height:22px; fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
-                تواصل عبر واتساب لطلب عرض سعر ${sName}
+            <div style="margin-top:16px;">
+              <button type="button" class="btn btn-whatsapp" onclick="inquireCustomWA('${sName}')">
+                <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.2c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.11.11-1.79-.11-.41-.13-.95-.31-1.63-.6-2.87-1.24-4.74-4.13-4.88-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+                <span>تواصل عبر واتساب لطلب عرض سعر ${sName}</span>
               </button>
             </div>
           </div>
@@ -689,6 +691,16 @@
         }
 
         renderPackages();
+
+        // تمرير سلس تلقائي في الجوال لرؤية الباقات مباشرة بعد اختيار القسم
+        if (window.innerWidth <= 768) {
+          const pkgSection = document.getElementById('packagesSectionTitle');
+          if (pkgSection) {
+            setTimeout(() => {
+              pkgSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+          }
+        }
       });
     });
 
@@ -708,7 +720,7 @@
       }
 
       const sName = serviceNamesMap[currentService];
-      let msg = `*طلب حجز وعرض سعر — GOLDEN LENS STUDIO*\n\n`;
+      let msg = `*طلب حجز وععرض سعر — GOLDEN LENS STUDIO*\n\n`;
       msg += `👤 *العميل:* ${name}\n`;
       msg += `📍 *المدينة / الموقع:* ${city}\n`;
       msg += `🎬 *نوع الخدمة:* ${sName}\n`;

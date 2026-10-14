@@ -2364,3 +2364,105 @@ footer p {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* ========================================================
+   MOBILE BOOKING PAGE FIXES (ULTIMATE PHONE OPTIMIZATION)
+   ======================================================== */
+@media (max-width: 768px) {
+  /* 1. إجبار جميع شبكات الباقات (بما فيها المطاعم) على عمود واحد مريح في الجوال */
+  .pkg-cards-grid,
+  #dynamicPackagesArea .pkg-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  /* 2. ضبط كروت اختيار الخدمة الـ 8 لتكون متناسقة بدون انضغاط للنصوص */
+  .services-select-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .service-select-card {
+    padding: 14px 8px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .service-name {
+    font-size: 0.86rem !important;
+    line-height: 1.35 !important;
+  }
+  .service-sub {
+    font-size: 0.72rem !important;
+  }
+
+  /* 3. إصلاح كروت الإضافات (الليوة والبث المباشر) في الجوال */
+  .addon-card {
+    padding: 16px 14px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .addon-left {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .addon-checkbox {
+    margin-top: 3px;
+  }
+  .addon-info h4 {
+    font-size: 0.94rem !important;
+    line-height: 1.45 !important;
+  }
+  .addon-info p {
+    font-size: 0.78rem !important;
+    line-height: 1.5 !important;
+  }
+  .addon-price-box {
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* 4. إصلاح ملخص الطلب النهائي لمنع تداخل الأسماء الطويلة */
+  .summary-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .summary-total-row {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-size: 1.05rem !important;
+  }
+  .summary-total-price {
+    font-size: 1.5rem !important;
+  }
+
+  /* 5. إصلاح زر عرض السعر المخصص في الجوال لئلا يخرج خارج الإطار */
+  .custom-quote-box {
+    padding: 26px 14px !important;
+  }
+  .custom-quote-box .btn-whatsapp {
+    width: 100% !important;
+    padding: 14px 12px !important;
+    font-size: 0.9rem !important;
+    white-space: normal !important;
+    line-height: 1.4 !important;
+  }
+
+  /* 6. إخفاء زر الواتساب العائم داخل صفحة الحجز بالجوال لعدم التغطية على أزرار الإرسال */
+  .booking-body .floating-wa {
+    display: none !important;
+  }
+}
